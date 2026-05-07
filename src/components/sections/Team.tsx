@@ -44,7 +44,7 @@ const Team = () => {
 
   return (
     <>
-      <section ref={containerRef} className="py-12 bg-background">
+      <section ref={containerRef} className="py-12 bg-transparent">
         <div className="container mx-auto px-4 md:max-w-7xl">
           <div className="team-heading flex flex-col items-center text-center mb-16 space-y-4">
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none">

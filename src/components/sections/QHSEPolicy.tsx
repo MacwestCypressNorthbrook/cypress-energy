@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -41,10 +41,20 @@ const QHSEPolicy = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-24 bg-[#F2F4F1] overflow-hidden">
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="xMidYMid slice">
+    <section ref={containerRef} className="relative py-24 bg-transparent overflow-hidden">
+      <svg
+        className="hidden absolute inset-0 w-full h-full pointer-events-none"
+        preserveAspectRatio="xMidYMid slice"
+      >
         <defs>
-          <pattern id="topo-qhse-policy" x="0" y="0" width="900" height="300" patternUnits="userSpaceOnUse">
+          <pattern
+            id="topo-qhse-policy"
+            x="0"
+            y="0"
+            width="900"
+            height="300"
+            patternUnits="userSpaceOnUse"
+          >
             {[
               { d: "M0,90 Q225,50 450,90 Q675,130 900,90", o: 0.07 },
               { d: "M0,130 Q225,90 450,130 Q675,170 900,130", o: 0.06 },
@@ -53,7 +63,14 @@ const QHSEPolicy = () => {
               { d: "M0,210 Q225,170 450,210 Q675,250 900,210", o: 0.04 },
               { d: "M0,250 Q225,210 450,250 Q675,290 900,250", o: 0.03 },
             ].map((line, i) => (
-              <path key={i} d={line.d} stroke="#13642C" fill="none" strokeWidth="1" opacity={line.o} />
+              <path
+                key={i}
+                d={line.d}
+                stroke="#13642C"
+                fill="none"
+                strokeWidth="1"
+                opacity={line.o}
+              />
             ))}
           </pattern>
         </defs>
@@ -77,7 +94,7 @@ const QHSEPolicy = () => {
               improve to serve our clients with the highest standards.
             </p>
 
-            <Link
+            <TransitionLink
               href="/qhse"
               className="inline-flex items-center gap-3 bg-[#13642C] hover:bg-[#0f4f22] text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all hover:scale-105 shadow-lg shadow-[#13642C]/20"
             >
@@ -90,7 +107,7 @@ const QHSEPolicy = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </Link>
+            </TransitionLink>
           </div>
 
           {/* RIGHT IMAGE */}
@@ -101,10 +118,10 @@ const QHSEPolicy = () => {
               <img
                 src="/images/1H6A2643-scaled.jpeg"
                 alt="Safety Operations"
-                className="w-full h-[420px] object-cover"
+                className="w-full h-105 object-cover"
               />
 
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/10 to-transparent" />
             </div>
           </div>
         </div>

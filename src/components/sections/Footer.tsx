@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 
 const serviceLinks = [
   { label: "Offshore Vessel Supply", href: "/services/offshore-vessel-supply" },
@@ -14,7 +13,7 @@ const serviceLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-white pt-24 pb-12 overflow-hidden">
+    <footer className="bg-transparent pt-24 pb-12 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* CTA Card */}
         <div className="bg-[#13642C] rounded-[3rem] p-12 md:p-24 relative overflow-hidden mb-24">
@@ -29,7 +28,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <Link href="/contact" className="relative group cursor-pointer">
+            <TransitionLink href="/contact" className="relative group cursor-pointer">
               <div
                 className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-[#DC5817] flex items-center justify-center group-hover:bg-[#C44D14] transition-colors"
                 style={{ animation: "spin-slow 20s linear infinite" }}
@@ -42,7 +41,7 @@ const Footer = () => {
                 className="absolute inset-0 border-2 border-dashed border-white/20 rounded-full"
                 style={{ animation: "spin-slower 30s linear infinite" }}
               />
-            </Link>
+            </TransitionLink>
           </div>
 
           <div className="absolute top-10 right-10 flex gap-2">
@@ -54,9 +53,9 @@ const Footer = () => {
         {/* Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
           <div className="space-y-6">
-            <Link href="/">
+            <TransitionLink href="/">
               <img src="/LOGO-FOOTER-3.png" alt="Cypress Energy" className="h-16 w-auto" />
-            </Link>
+            </TransitionLink>
             <p className="text-muted-foreground text-sm font-medium leading-relaxed">
               Values that shape our operations. Indigenous Ghanaian oil & gas services company
               delivering excellence across West Africa.
@@ -70,9 +69,9 @@ const Footer = () => {
             <ul className="space-y-3 text-sm font-bold text-muted-foreground">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-black transition-colors">
+                  <TransitionLink href={link.href} className="hover:text-black transition-colors">
                     {link.label}
-                  </Link>
+                  </TransitionLink>
                 </li>
               ))}
             </ul>
@@ -82,29 +81,29 @@ const Footer = () => {
             <h5 className="font-black uppercase tracking-widest text-sm text-[#13642C]">Company</h5>
             <ul className="space-y-3 text-sm font-bold text-muted-foreground">
               <li>
-                <Link href="/about" className="hover:text-black transition-colors">
+                <TransitionLink href="/about" className="hover:text-black transition-colors">
                   About Us
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link href="/management" className="hover:text-black transition-colors">
+                <TransitionLink href="/management" className="hover:text-black transition-colors">
                   Management
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link href="/projects" className="hover:text-black transition-colors">
+                <TransitionLink href="/projects" className="hover:text-black transition-colors">
                   Projects
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link href="/partners" className="hover:text-black transition-colors">
+                <TransitionLink href="/partners" className="hover:text-black transition-colors">
                   Partners
-                </Link>
+                </TransitionLink>
               </li>
               <li>
-                <Link href="/qhse" className="hover:text-black transition-colors">
+                <TransitionLink href="/qhse" className="hover:text-black transition-colors">
                   QHSE Policy
-                </Link>
+                </TransitionLink>
               </li>
             </ul>
           </div>

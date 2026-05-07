@@ -36,7 +36,7 @@ const Partners = () => {
     <section ref={containerRef} className="relative py-20 overflow-hidden">
       {/* Topographic contour pattern */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
+        className="hidden absolute inset-0 w-full h-full pointer-events-none"
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
@@ -48,11 +48,41 @@ const Partners = () => {
             height="220"
             patternUnits="userSpaceOnUse"
           >
-            <path d="M0,80 Q175,40 350,80 Q525,120 700,80" stroke="#13642C" fill="none" strokeWidth="1" opacity="0.07" />
-            <path d="M0,115 Q175,75 350,115 Q525,155 700,115" stroke="#13642C" fill="none" strokeWidth="1" opacity="0.05" />
-            <path d="M0,48 Q175,8 350,48 Q525,88 700,48" stroke="#13642C" fill="none" strokeWidth="1" opacity="0.04" />
-            <path d="M0,150 Q175,110 350,150 Q525,190 700,150" stroke="#13642C" fill="none" strokeWidth="1" opacity="0.04" />
-            <path d="M0,185 Q175,145 350,185 Q525,225 700,185" stroke="#13642C" fill="none" strokeWidth="1" opacity="0.03" />
+            <path
+              d="M0,80 Q175,40 350,80 Q525,120 700,80"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.07"
+            />
+            <path
+              d="M0,115 Q175,75 350,115 Q525,155 700,115"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.05"
+            />
+            <path
+              d="M0,48 Q175,8 350,48 Q525,88 700,48"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.04"
+            />
+            <path
+              d="M0,150 Q175,110 350,150 Q525,190 700,150"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.04"
+            />
+            <path
+              d="M0,185 Q175,145 350,185 Q525,225 700,185"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.03"
+            />
           </pattern>
         </defs>
         <rect width="100%" height="100%" fill="url(#topo-partners)" />
@@ -60,9 +90,7 @@ const Partners = () => {
 
       <div className="relative z-10 container mx-auto px-4 max-w-7xl mb-12">
         <div className="space-y-2">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#13642C]">
-            Trusted By
-          </p>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#13642C]">Trusted By</p>
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
             Our <span className="text-foreground/20">Partners</span>
           </h2>
@@ -73,14 +101,12 @@ const Partners = () => {
         <div ref={trackRef} className="flex items-center will-change-transform">
           {/* Original + duplicate for seamless loop */}
           {[...logos, ...logos].map((logo, i) => (
-            <div
-              key={i}
-              className="shrink-0 px-10 flex items-center justify-center"
-            >
+            <div key={i} className="shrink-0 px-10 flex items-center justify-center">
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-12 md:h-16 w-auto object-contain grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                // className="h-12 md:h-16 w-auto object-contain grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300"
+                className="h-12 md:h-16 w-auto object-contain transition-all duration-300"
                 draggable={false}
               />
             </div>

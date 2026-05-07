@@ -55,21 +55,21 @@
   --card-foreground: #000000;
   --popover: #ffffff;
   --popover-foreground: #000000;
-  --primary: #DC5817;
+  --primary: #dc5817;
   --primary-foreground: #ffffff;
-  --secondary: #13642C;
+  --secondary: #13642c;
   --secondary-foreground: #ffffff;
   --muted: #f4f4f5;
   --muted-foreground: #71717a;
-  --accent: #DC5817;
+  --accent: #dc5817;
   --accent-foreground: #ffffff;
   --destructive: #ef4444;
   --destructive-foreground: #fafafa;
   --border: #e4e4e7;
   --input: #e4e4e7;
-  --ring: #DC5817;
-  --chart-1: #DC5817;
-  --chart-2: #13642C;
+  --ring: #dc5817;
+  --chart-1: #dc5817;
+  --chart-2: #13642c;
   --chart-3: #27272a;
   --chart-4: #e4e4e7;
   --chart-5: #ffffff;
@@ -117,5 +117,64 @@
   html,
   body {
     @apply bg-background text-foreground font-sans overflow-x-hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #13642c #e8f0eb;
   }
+
+  /* Custom Webkit Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px; /* Reduced width */
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #e8f0eb; /* Lighter version of theme green */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #13642c; /* Theme green */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0f4f22; /* Darker green on hover */
+  }
+
+  ::-webkit-scrollbar-button {
+    display: none;
+  }
+}
+
+@keyframes energy-flow {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.35;
+  }
+  80% {
+    opacity: 0.35;
+  }
+  100% {
+    stroke-dashoffset: -0.5;
+    opacity: 0;
+  } /* move past 0 to ensure full exit */
+}
+
+.energy-path {
+  animation: energy-flow linear infinite;
+  animation-fill-mode: backwards; /* Ensures 0% keyframe is applied during delay */
+  stroke-dashoffset: 1;
+  opacity: 0;
+}
+
+/* Disable native smooth scroll — Lenis owns this */
+html {
+  scroll-behavior: auto !important;
+}
+
+/* Prevent scroll conflicts on fixed/sticky elements */
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }

@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 
 gsap.registerPlugin();
 
@@ -60,12 +60,12 @@ const PageHero = ({
             {breadcrumb.map((crumb, i) => (
               <React.Fragment key={crumb.href}>
                 {i > 0 && <span className="text-white/40 text-sm">/</span>}
-                <Link
+                <TransitionLink
                   href={crumb.href}
                   className="text-white/60 text-sm font-bold uppercase tracking-widest hover:text-white transition-colors"
                 >
                   {crumb.label}
-                </Link>
+                </TransitionLink>
               </React.Fragment>
             ))}
           </div>

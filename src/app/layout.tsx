@@ -25,6 +25,9 @@ export const metadata: Metadata = {
   },
 };
 
+import SmoothScrolling from "@/components/SmoothScrolling";
+import PageTransition from "@/components/PageTransition";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +46,10 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <AppShell>{children}</AppShell>
+        <SmoothScrolling>
+          <PageTransition />
+          <AppShell>{children}</AppShell>
+        </SmoothScrolling>
       </body>
     </html>
   );

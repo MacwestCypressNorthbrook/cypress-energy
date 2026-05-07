@@ -36,10 +36,20 @@ const InteractiveShowcase = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-24 bg-[#F2F4F1] overflow-hidden">
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="xMidYMid slice">
+    <section ref={containerRef} className="relative py-24 bg-transparent overflow-hidden">
+      <svg
+        className="hidden absolute inset-0 w-full h-full pointer-events-none"
+        preserveAspectRatio="xMidYMid slice"
+      >
         <defs>
-          <pattern id="topo-showcase" x="0" y="0" width="900" height="300" patternUnits="userSpaceOnUse">
+          <pattern
+            id="topo-showcase"
+            x="0"
+            y="0"
+            width="900"
+            height="300"
+            patternUnits="userSpaceOnUse"
+          >
             {[
               { d: "M0,65 Q225,25 450,65 Q675,105 900,65", o: 0.07 },
               { d: "M0,105 Q225,65 450,105 Q675,145 900,105", o: 0.06 },
@@ -48,7 +58,14 @@ const InteractiveShowcase = () => {
               { d: "M0,185 Q225,145 450,185 Q675,225 900,185", o: 0.04 },
               { d: "M0,225 Q225,185 450,225 Q675,265 900,225", o: 0.03 },
             ].map((line, i) => (
-              <path key={i} d={line.d} stroke="#13642C" fill="none" strokeWidth="1" opacity={line.o} />
+              <path
+                key={i}
+                d={line.d}
+                stroke="#13642C"
+                fill="none"
+                strokeWidth="1"
+                opacity={line.o}
+              />
             ))}
           </pattern>
         </defs>

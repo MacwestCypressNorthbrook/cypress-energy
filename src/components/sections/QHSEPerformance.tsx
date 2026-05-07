@@ -54,10 +54,10 @@ const QHSEPerformance = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-12 bg-[#F2F4F1] overflow-hidden">
+    <section ref={containerRef} className="relative py-12 bg-transparent overflow-hidden">
       {/* SAME blueprint grid style */}
       <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
+        className="hidden absolute inset-0 w-full h-full pointer-events-none"
         preserveAspectRatio="xMidYMid slice"
       >
         <defs>
@@ -119,7 +119,7 @@ const QHSEPerformance = () => {
             return (
               <div
                 key={i}
-                className={`qhse-card group bg-white rounded-[2.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-[260px]`}
+                className={`qhse-card group bg-white rounded-[2.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-65`}
               >
                 <div className="space-y-4">
                   <span

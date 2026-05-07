@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useCallback } from "react";
-import Link from "next/link";
+import React, { useRef } from "react";
+import TransitionLink from "../TransitionLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -59,9 +59,20 @@ const serviceList = [
   },
 ];
 
+// Configuration for the 4x4 Bento Grid mapping to 8 items
+const bentoClasses = [
+  "md:col-span-2 md:row-span-2", // 01: Large square
+  "md:col-span-1 md:row-span-1", // 02: Small square
+  "md:col-span-1 md:row-span-2", // 03: Tall portrait
+  "md:col-span-1 md:row-span-1", // 04: Small square
+  "md:col-span-2 md:row-span-1", // 05: Wide landscape
+  "md:col-span-1 md:row-span-1", // 06: Small square
+  "md:col-span-1 md:row-span-1", // 07: Small square
+  "md:col-span-4 md:row-span-1 lg:col-span-4", // 08: Full width landscape
+];
+
 const Services = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cursorImgRef = useRef<HTMLImageElement>(null);
 
   useGSAP(
     () => {
@@ -73,144 +84,144 @@ const Services = () => {
           y: 0,
           duration: 0.9,
           ease: "power2.out",
-          scrollTrigger: { trigger: ".services-section-heading", start: "top 85%", once: true },
-        },
+          scrollTrigger: { trigger: containerRef.current, start: "top 85%", once: true },
+        }
       );
-      gsap.fromTo(
-        ".service-item",
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.07,
-          ease: "power2.out",
-          scrollTrigger: { trigger: ".services-list", start: "top 80%", once: true },
-        },
-      );
+
+      const wrappers = gsap.utils.toArray<HTMLElement>(".bento-item-wrapper");
+      
+      const directions = [
+        { x: "-101%", y: "0%" }, // 01: From Left
+        { x: "0%", y: "-101%" }, // 02: From Top
+        { x: "101%", y: "0%" },  // 03: From Right
+        { x: "0%", y: "101%" },  // 04: From Bottom
+        { x: "-101%", y: "0%" }, // 05: From Left
+        { x: "0%", y: "101%" },  // 06: From Bottom
+        { x: "101%", y: "0%" },  // 07: From Right
+        { x: "0%", y: "101%" },  // 08: From Bottom
+      ];
+
+      wrappers.forEach((wrapper, i) => {
+        const item = wrapper.querySelector(".bento-item");
+        if (!item) return;
+
+        const dir = directions[i % directions.length];
+
+        gsap.fromTo(
+          item,
+          { ...dir },
+          {
+            x: "0%",
+            y: "0%",
+            ease: "none", // Linear ease is best for scrubbed scroll
+            scrollTrigger: {
+              trigger: wrapper,
+              start: "top 95%", // Start as it enters the bottom
+              end: "bottom 90%", // Fully settle as soon as the bottom of the card is visible
+              scrub: 1.2, // Slightly faster catch-up
+            },
+          }
+        );
+      });
     },
-    { scope: containerRef },
+    { scope: containerRef }
   );
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (!cursorImgRef.current || !containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    gsap.to(cursorImgRef.current, {
-      x: e.clientX - rect.left + 24,
-      y: e.clientY - rect.top - 80,
-      duration: 0.35,
-      ease: "power2.out",
-    });
-  }, []);
-
-  const handleItemEnter = useCallback((image: string) => {
-    if (!cursorImgRef.current) return;
-    cursorImgRef.current.src = image;
-    gsap.to(cursorImgRef.current, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.4)" });
-  }, []);
-
-  const handleItemLeave = useCallback(() => {
-    if (!cursorImgRef.current) return;
-    gsap.to(cursorImgRef.current, { opacity: 0, scale: 0.88, duration: 0.25, ease: "power2.in" });
-  }, []);
-
   return (
-    <section className="relative py-12 bg-white overflow-hidden" ref={containerRef} onMouseMove={handleMouseMove}>
-      {/* Floating cursor image */}
-      <img
-        ref={cursorImgRef}
-        src={serviceList[0].image}
-        alt=""
-        className="pointer-events-none absolute z-50 w-56 h-40 rounded-2xl overflow-hidden shadow-2xl object-cover opacity-0"
-        style={{ top: 0, left: 0, transform: "scale(0.88)" }}
-      />
-
+    <section className="relative py-24 bg-transparent overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* Heading */}
-        <div className="services-section-heading mb-14 space-y-3">
-          {/* <p className="text-2xl underline font-extrabold uppercase tracking-widest text-[#DC5817]">
-            What We Do
-          </p> */}
-          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tight leading-none">
-            Our <span className="text-foreground/15">Services</span>
-          </h2>
-        </div>
-
-        {/* Numbered list */}
-        <div className="services-list divide-y divide-border">
-          {serviceList.map((service) => (
-            <Link
-              key={service.id}
-              href={service.href}
-              className="service-item group flex items-center gap-8 py-7 transition-all duration-300 hover:pl-4"
-              onMouseEnter={() => handleItemEnter(service.image)}
-              onMouseLeave={handleItemLeave}
-            >
-              {(() => {
-                const i = serviceList.indexOf(service);
-                const green = i % 2 === 1;
-                const accent = green ? "group-hover:text-[#13642C]" : "group-hover:text-[#DC5817]";
-                const arrowBg = green
-                  ? "group-hover:bg-[#13642C] group-hover:border-[#13642C]"
-                  : "group-hover:bg-[#DC5817] group-hover:border-[#DC5817]";
-                return (
-                  <>
-                    <span
-                      className={`text-sm font-bold text-foreground/25 ${accent} transition-colors min-w-10`}
-                    >
-                      {service.id}
-                    </span>
-                    <h3
-                      className={`flex-1 text-xl md:text-5xl font-black uppercase tracking-tight leading-none ${accent} transition-colors duration-300`}
-                    >
-                      {service.title}
-                    </h3>
-                    <div className="shrink-0">
-                      <div
-                        className={`w-11 h-11 rounded-full border border-border flex items-center justify-center ${arrowBg} transition-all duration-300`}
-                      >
-                        <svg
-                          className="w-5 h-5 text-foreground/40 group-hover:text-white transform group-hover:rotate-45 transition-all duration-300"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  </>
-                );
-              })()}
-              <div className="hidden">
-                <div className="w-11 h-11 rounded-full border border-border flex items-center justify-center transition-all duration-300">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M14 5l7 7m0 0l-7 7m7-7H3"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </Link>
-          ))}
-
-          <div className="pt-8 flex items-center justify-between">
-            <Link
-              href="/services"
-              className="text-sm font-bold text-[#13642C] uppercase tracking-widest hover:underline"
-            >
-              View All 13 Services →
-            </Link>
+        
+        {/* Section Heading */}
+        <div className="services-section-heading mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="space-y-3">
+            <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#DC5817]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#DC5817]" />
+              What We Do
+            </p>
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+              Our <span className="text-foreground/15">Services</span>
+            </h2>
           </div>
+          <TransitionLink
+            href="/services"
+            className="hidden md:inline-flex items-center gap-2 text-[#13642C] font-bold hover:gap-4 transition-all text-sm uppercase tracking-widest group"
+          >
+            View All Services
+            <svg
+              className="w-4 h-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </TransitionLink>
         </div>
+
+        {/* Bento Grid */}
+        <div className="bento-grid grid grid-cols-1 md:grid-cols-4 auto-rows-[280px] md:auto-rows-[320px] gap-4 md:gap-6 grid-flow-row-dense">
+          {serviceList.map((service, i) => (
+            <div 
+              key={service.id} 
+              className={`bento-item-wrapper ${bentoClasses[i]} rounded-[2rem] overflow-hidden`}
+              style={{ backgroundColor: 'transparent' }} 
+            >
+              <TransitionLink
+                href={service.href}
+                className="bento-item relative w-full h-full block rounded-[2rem] overflow-hidden group shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-[#13642C]/20"
+              >
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 ease-out group-hover:scale-110"
+                  style={{ backgroundImage: `url('${service.image}')` }}
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Content Overlay */}
+                <div className="relative z-10 w-full h-full flex flex-col justify-end p-6 md:p-8">
+                  <div className="flex items-end justify-between gap-4">
+                    <div className="transform translate-y-2 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                      <span className="text-[#DC5817] font-black text-xs md:text-sm uppercase tracking-widest block mb-2 opacity-90">
+                        {service.id}
+                      </span>
+                      <h3 className="text-white font-black text-xl md:text-2xl lg:text-3xl leading-tight uppercase tracking-tight">
+                        {service.title}
+                      </h3>
+                    </div>
+                    
+                    {/* Hover Arrow Icon */}
+                    <div className="shrink-0 w-12 h-12 rounded-full bg-[#13642C] flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+                      <svg className="w-5 h-5 text-white -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </TransitionLink>
+            </div>
+          ))}
+        </div>
+        
+        {/* Mobile View All Link */}
+        <div className="mt-10 flex justify-center md:hidden">
+          <TransitionLink
+            href="/services"
+            className="inline-flex items-center gap-2 text-[#13642C] font-bold hover:gap-4 transition-all text-sm uppercase tracking-widest group"
+          >
+            View All Services
+            <svg
+              className="w-4 h-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </TransitionLink>
+        </div>
+
       </div>
     </section>
   );

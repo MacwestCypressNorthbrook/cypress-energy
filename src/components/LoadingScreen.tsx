@@ -106,7 +106,7 @@ const LoadingScreen = ({ onComplete }: Props) => {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[300] flex items-center justify-center bg-white"
+      className="fixed inset-0 z-[10001] flex items-center justify-center bg-white"
     >
       {/* Whirling arc system */}
       <svg

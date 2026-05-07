@@ -1,15 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { LoadingProvider, useLoading } from "@/context/LoadingContext";
 import LoadingScreen from "./LoadingScreen";
 
-export default function AppShell({ children }: { children: React.ReactNode }) {
-  const [done, setDone] = useState(false);
+const AppShellInner = ({ children }: { children: React.ReactNode }) => {
+  const { isLoaded, setIsLoaded } = useLoading();
 
   return (
     <>
-      {!done && <LoadingScreen onComplete={() => setDone(true)} />}
+      {!isLoaded && <LoadingScreen onComplete={() => setIsLoaded(true)} />}
       {children}
     </>
+  );
+};
+
+export default function AppShell({ children }: { children: React.ReactNode }) {
+  return (
+    <LoadingProvider>
+      <AppShellInner>{children}</AppShellInner>
+    </LoadingProvider>
   );
 }

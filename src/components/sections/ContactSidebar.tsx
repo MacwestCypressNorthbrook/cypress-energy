@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 
 const ContactSidebar = () => {
   return (
@@ -12,7 +12,7 @@ const ContactSidebar = () => {
         </h3>
       </div>
 
-      <Link
+      <TransitionLink
         href="/contact"
         className="inline-flex items-center gap-3 bg-[#DC5817] text-white font-bold px-8 py-4 rounded-full hover:bg-[#C44D14] transition-all hover:scale-105 shadow-lg shadow-[#DC5817]/20 text-sm"
       >
@@ -20,7 +20,7 @@ const ContactSidebar = () => {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
         </svg>
-      </Link>
+      </TransitionLink>
 
       <div className="space-y-6 pt-2">
         <div className="space-y-1">

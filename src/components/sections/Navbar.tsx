@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import Link from "next/link";
+import TransitionLink from "../TransitionLink";
 import { usePathname } from "next/navigation";
 import { services } from "@/lib/services-data";
 import gsap from "gsap";
@@ -83,7 +83,13 @@ const Navbar = () => {
   const animateHamburgerClose = useCallback(() => {
     if (!bar1Ref.current || !bar2Ref.current || !bar3Ref.current) return;
     gsap.to(bar1Ref.current, { y: 0, rotate: 0, duration: 0.35, ease: "power3.inOut" });
-    gsap.to(bar2Ref.current, { opacity: 1, scaleX: 1, duration: 0.3, delay: 0.05, ease: "power2.out" });
+    gsap.to(bar2Ref.current, {
+      opacity: 1,
+      scaleX: 1,
+      duration: 0.3,
+      delay: 0.05,
+      ease: "power2.out",
+    });
     gsap.to(bar3Ref.current, { y: 0, rotate: 0, duration: 0.35, ease: "power3.inOut" });
   }, []);
 
@@ -119,13 +125,17 @@ const Navbar = () => {
     })
       .to(topBar, { scaleX: 1, duration: 0.6, ease: "power3.out" }, "-=0.35")
       .to(deco, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.5")
-      .to(items, {
-        y: 0,
-        opacity: 1,
-        duration: 0.65,
-        stagger: 0.07,
-        ease: "power3.out",
-      }, "-=0.6")
+      .to(
+        items,
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.65,
+          stagger: 0.07,
+          ease: "power3.out",
+        },
+        "-=0.6",
+      )
       .to(cta, { y: 0, opacity: 1, duration: 0.45, ease: "back.out(1.5)" }, "-=0.2")
       .to(contact, { opacity: 1, duration: 0.4, ease: "power2.out" }, "-=0.2");
 
@@ -155,20 +165,32 @@ const Navbar = () => {
 
     tl.to(contact, { opacity: 0, duration: 0.15, ease: "power2.in" })
       .to(cta, { y: 30, opacity: 0, duration: 0.2, ease: "power2.in" }, "<")
-      .to(items, {
-        y: -50,
-        opacity: 0,
-        duration: 0.25,
-        stagger: { each: 0.04, from: "end" },
-        ease: "power2.in",
-      }, "<0.05")
+      .to(
+        items,
+        {
+          y: -50,
+          opacity: 0,
+          duration: 0.25,
+          stagger: { each: 0.04, from: "end" },
+          ease: "power2.in",
+        },
+        "<0.05",
+      )
       .to(deco, { opacity: 0, y: -30, duration: 0.25, ease: "power2.in" }, "<")
-      .to(topBar, { scaleX: 0, transformOrigin: "right center", duration: 0.35, ease: "power3.in" }, "-=0.1")
-      .to(panel, {
-        clipPath: "inset(0% 0% 100% 0%)",
-        duration: 0.6,
-        ease: "power4.inOut",
-      }, "-=0.15");
+      .to(
+        topBar,
+        { scaleX: 0, transformOrigin: "right center", duration: 0.35, ease: "power3.in" },
+        "-=0.1",
+      )
+      .to(
+        panel,
+        {
+          clipPath: "inset(0% 0% 100% 0%)",
+          duration: 0.6,
+          ease: "power4.inOut",
+        },
+        "-=0.15",
+      );
 
     tlRef.current = tl;
   }, [animateHamburgerClose]);
@@ -184,23 +206,21 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed z-50 transition-all duration-500 mx-auto left-0 right-0 top-4 w-[calc(100%-2rem)] max-w-7xl rounded-[1.5rem] border border-black/5 ${
           transparent
             ? "bg-transparent py-5"
-            : scrolled
-              ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
-              : "bg-white py-5"
+            : "bg-white backdrop-blur-md shadow-lg py-3 shadow-black/5"
         }`}
       >
         <div className="container mx-auto px-4 flex items-center justify-between max-w-7xl">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <TransitionLink href="/" className="flex items-center">
             <img
               src={"/logo.png"}
               alt="Cypress Energy"
               className="h-10 md:h-14 w-auto transition-opacity duration-300"
             />
-          </Link>
+          </TransitionLink>
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center gap-8">
@@ -226,7 +246,12 @@ const Navbar = () => {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
               {activeDropdown === "about" && (
@@ -236,7 +261,7 @@ const Navbar = () => {
                   onMouseLeave={closeDropdown}
                 >
                   {aboutLinks.map((link) => (
-                    <Link
+                    <TransitionLink
                       key={link.href}
                       href={link.href}
                       className={`block px-5 py-3 text-sm font-bold transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
@@ -244,7 +269,7 @@ const Navbar = () => {
                       }`}
                     >
                       {link.label}
-                    </Link>
+                    </TransitionLink>
                   ))}
                 </div>
               )}
@@ -272,7 +297,12 @@ const Navbar = () => {
                   stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
               {activeDropdown === "services" && (
@@ -282,16 +312,16 @@ const Navbar = () => {
                   onMouseLeave={closeDropdown}
                 >
                   <div className="px-4 mb-3 pb-3 border-b border-border/40">
-                    <Link
+                    <TransitionLink
                       href="/services"
                       className="text-xs font-black uppercase tracking-widest text-[#DC5817] hover:underline"
                     >
                       View All Services →
-                    </Link>
+                    </TransitionLink>
                   </div>
                   <div className="grid grid-cols-2 gap-1 px-2">
                     {serviceLinks.map((link) => (
-                      <Link
+                      <TransitionLink
                         key={link.href}
                         href={link.href}
                         className={`block px-4 py-2.5 text-sm font-bold rounded-xl transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
@@ -299,35 +329,43 @@ const Navbar = () => {
                         }`}
                       >
                         {link.label}
-                      </Link>
+                      </TransitionLink>
                     ))}
                   </div>
                 </div>
               )}
             </div>
 
-            <Link
+            <TransitionLink
               href="/projects"
               className={`text-sm font-bold transition-colors tracking-tight ${
-                isActive("/projects") ? "text-[#13642C]" : transparent ? "text-white" : "text-foreground"
+                isActive("/projects")
+                  ? "text-[#13642C]"
+                  : transparent
+                    ? "text-white"
+                    : "text-foreground"
               }`}
             >
               Projects
-            </Link>
+            </TransitionLink>
 
-            <Link
+            <TransitionLink
               href="/partners"
               className={`text-sm font-bold transition-colors tracking-tight ${
-                isActive("/partners") ? "text-[#13642C]" : transparent ? "text-white" : "text-foreground"
+                isActive("/partners")
+                  ? "text-[#13642C]"
+                  : transparent
+                    ? "text-white"
+                    : "text-foreground"
               }`}
             >
               Partners
-            </Link>
+            </TransitionLink>
           </div>
 
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-4">
-            <Link
+            <TransitionLink
               href="/contact"
               className={`hidden lg:inline-flex items-center font-bold px-7 py-2.5 rounded-md text-sm transition-all hover:scale-105 ${
                 transparent
@@ -336,11 +374,11 @@ const Navbar = () => {
               }`}
             >
               Contact Us
-            </Link>
+            </TransitionLink>
 
             {/* Hamburger — 3 animated bars */}
             <button
-              className={`lg:hidden p-2 flex flex-col justify-center items-center w-10 h-10 gap-0 relative z-[60] ${
+              className={`lg:hidden p-2 flex flex-col justify-center items-center w-10 h-10 gap-0 relative z-60 ${
                 mobileOpen ? "text-white" : transparent ? "text-white" : "text-foreground"
               }`}
               onClick={toggleMenu}
@@ -376,7 +414,7 @@ const Navbar = () => {
 
           {/* Decorative background "CE" monogram */}
           <div
-            className="mob-deco absolute bottom-0 right-0 text-[22rem] font-black text-white/[0.03] leading-none select-none pointer-events-none translate-y-8"
+            className="mob-deco absolute bottom-0 right-0 text-[22rem] font-black text-white/30 leading-none select-none pointer-events-none translate-y-8"
             aria-hidden
           >
             CE
@@ -388,7 +426,7 @@ const Navbar = () => {
             <nav className="flex-1 flex flex-col justify-center">
               {mobileNavItems.map((item, i) => (
                 <div key={item.href} className="mob-item border-b border-white/10 last:border-0">
-                  <Link
+                  <TransitionLink
                     href={item.href}
                     onClick={closeMenu}
                     className={`group flex items-center justify-between py-5 transition-colors duration-200 ${
@@ -409,9 +447,14 @@ const Navbar = () => {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 18l6-6-6-6" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 18l6-6-6-6"
+                      />
                     </svg>
-                  </Link>
+                  </TransitionLink>
                 </div>
               ))}
             </nav>
@@ -420,16 +463,21 @@ const Navbar = () => {
             <div className="space-y-6 pt-6">
               {/* CTA */}
               <div className="mob-cta">
-                <Link
+                <TransitionLink
                   href="/contact"
                   onClick={closeMenu}
                   className="inline-flex items-center gap-3 bg-[#DC5817] hover:bg-[#C44D14] text-white font-black px-8 py-4 rounded-full text-sm uppercase tracking-widest transition-colors"
                 >
                   Contact Us
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
-                </Link>
+                </TransitionLink>
               </div>
 
               {/* Contact info */}

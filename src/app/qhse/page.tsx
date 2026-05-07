@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import Link from "next/link";
+import TransitionLink from "@/components/TransitionLink";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import PageHero from "@/components/layout/PageHero";
@@ -124,12 +124,12 @@ export default function QHSEPage() {
                 >
                   Download Policy
                 </a>
-                <Link
+                <TransitionLink
                   href="/contact"
                   className="inline-flex items-center gap-3 border border-border text-foreground font-bold px-8 py-4 rounded-full text-sm hover:border-[#DC5817] hover:text-[#DC5817] transition-all"
                 >
                   QHSE Enquiry
-                </Link>
+                </TransitionLink>
               </div>
             </div>
 
