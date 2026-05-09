@@ -1,0 +1,40 @@
+.whiteBg {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: white;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.button {
+  animation: ani2 0.7s steps(22) forwards;
+}
+
+.button:hover {
+  animation: ani 0.7s steps(22) forwards;
+}
+
+@keyframes ani {
+  from {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes ani2 {
+  from {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+
+  to {
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+  }
+}

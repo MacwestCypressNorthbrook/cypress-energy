@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { services } from "@/lib/services-data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import MaskButton from "../MaskButton";
+import FluidButton from "../FluidButton";
 
 gsap.registerPlugin(useGSAP);
 
@@ -35,6 +37,8 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navPillRef = useRef<HTMLDivElement>(null);
+  const pillBgRef = useRef<HTMLDivElement>(null);
 
   // Mobile menu refs
   const menuRef = useRef<HTMLDivElement>(null);
@@ -48,6 +52,81 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Animate pill background following mouse
+  useEffect(() => {
+    const navPill = navPillRef.current;
+    const pillBg = pillBgRef.current;
+    if (!navPill || !pillBg) return;
+
+    const getMenuItems = () => {
+      return Array.from(navPill.querySelectorAll("[data-menu-item]")) as HTMLElement[];
+    };
+
+    const animateToPill = (item: HTMLElement, duration = 0.4) => {
+      const navRect = navPill.getBoundingClientRect();
+      const itemRect = item.getBoundingClientRect();
+
+      const x = itemRect.left - navRect.left;
+      const y = itemRect.top - navRect.top;
+      const width = itemRect.width;
+      const height = itemRect.height;
+
+      gsap.to(pillBg, {
+        x: x,
+        y: y,
+        width: width,
+        height: height,
+        duration: duration,
+        ease: "power2.out",
+      });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const items = getMenuItems();
+      const navRect = navPill.getBoundingClientRect();
+      const mouseX = e.clientX - navRect.left;
+
+      let closestItem = items[0];
+      let closestDistance = Infinity;
+
+      items.forEach((item) => {
+        const itemRect = item.getBoundingClientRect();
+        const itemCenterX = itemRect.left - navRect.left + itemRect.width / 2;
+        const distance = Math.abs(mouseX - itemCenterX);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestItem = item;
+        }
+      });
+
+      animateToPill(closestItem, 0.3);
+    };
+
+    const handleMouseLeave = () => {
+      const activeItem = navPill.querySelector("[data-active]") as HTMLElement;
+      if (activeItem) {
+        animateToPill(activeItem, 0.5);
+      }
+    };
+
+    navPill.addEventListener("mousemove", handleMouseMove);
+    navPill.addEventListener("mouseleave", handleMouseLeave);
+
+    // Initialize to active item on mount
+    setTimeout(() => {
+      const activeItem = navPill.querySelector("[data-active]") as HTMLElement;
+      if (activeItem) {
+        animateToPill(activeItem, 0);
+      }
+    }, 0);
+
+    return () => {
+      navPill.removeEventListener("mousemove", handleMouseMove);
+      navPill.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     setActiveDropdown(null);
@@ -206,13 +285,11 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed z-50 transition-all duration-500 mx-auto left-0 right-0 top-4 w-[calc(100%-2rem)] max-w-7xl rounded-[1.5rem] border border-black/5 ${
-          transparent
-            ? "bg-transparent py-5"
-            : "bg-white backdrop-blur-md shadow-lg py-3 shadow-black/5"
+        className={`fixed z-50 transition-all duration-500 mx-auto left-0 right-0 top-0 w-[calc(100%-2rem)] max-w-9xl rounded-[1.5rem] ${
+          transparent ? "bg-transparent py-5" : ""
         }`}
       >
-        <div className="container mx-auto px-4 flex items-center justify-between max-w-7xl">
+        <div className="container mx-auto flex items-center justify-between max-w-7xl">
           {/* Logo */}
           <TransitionLink href="/" className="flex items-center">
             <img
@@ -223,108 +300,74 @@ const Navbar = () => {
           </TransitionLink>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-8">
-            {/* About Dropdown */}
+          <div className="hidden absolute left-1/2 top-0 transform -translate-x-1/2 translate-y-1/5 lg:flex items-center gap-0">
+            {/* Pill-shaped Navigation Container */}
             <div
-              className="relative"
-              onMouseEnter={() => openDropdown("about")}
-              onMouseLeave={closeDropdown}
+              ref={navPillRef}
+              className="relative bg-white/0 backdrop-blur-sm rounded-2xl p-1 flex items-center gap-8"
             >
-              <button
-                className={`text-sm font-bold transition-colors tracking-tight flex items-center gap-1 ${
-                  isActive("/about") || isActive("/management")
-                    ? "text-[#13642C]"
-                    : transparent
-                      ? "text-white"
-                      : "text-foreground"
+              {/* Animated white pill background */}
+              <div
+                ref={pillBgRef}
+                className="absolute left-0 top-0 bg-white rounded-2xl shadow-sm pointer-events-none"
+                style={{
+                  width: "80px",
+                  height: "100%",
+                }}
+              />
+              {/* Home */}
+              <TransitionLink
+                href="/"
+                data-menu-item
+                data-active={pathname === "/" ? "" : undefined}
+                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-4 py-2.5 rounded-2xl ${
+                  pathname === "/" ? "text-foreground" : "text-foreground/70 hover:text-foreground"
                 }`}
               >
-                About Cypress
-                <svg
-                  className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {activeDropdown === "about" && (
-                <div
-                  className="absolute top-full left-0 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-3 min-w-[180px] z-50"
-                  onMouseEnter={() => openDropdown("about")}
-                  onMouseLeave={closeDropdown}
-                >
-                  {aboutLinks.map((link) => (
-                    <TransitionLink
-                      key={link.href}
-                      href={link.href}
-                      className={`block px-5 py-3 text-sm font-bold transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
-                        pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
-                      }`}
-                    >
-                      {link.label}
-                    </TransitionLink>
-                  ))}
-                </div>
-              )}
-            </div>
+                Home
+              </TransitionLink>
 
-            {/* Services Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => openDropdown("services")}
-              onMouseLeave={closeDropdown}
-            >
-              <button
-                className={`text-sm font-bold transition-colors tracking-tight flex items-center gap-1 ${
-                  isActive("/services")
-                    ? "text-[#13642C]"
-                    : transparent
-                      ? "text-white"
-                      : "text-foreground"
-                }`}
+              {/* About Dropdown */}
+              <div
+                className="relative"
+                data-menu-item
+                onMouseEnter={() => openDropdown("about")}
+                onMouseLeave={closeDropdown}
+                data-active={isActive("/about") || isActive("/management") ? "" : undefined}
               >
-                Our Services
-                <svg
-                  className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "services" ? "rotate-180" : ""}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                <button
+                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-4 py-2.5 rounded-2xl ${
+                    isActive("/about") || isActive("/management")
+                      ? "text-foreground"
+                      : "text-foreground/70 hover:text-foreground"
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
-              {activeDropdown === "services" && (
-                <div
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-4 z-50 w-[680px]"
-                  onMouseEnter={() => openDropdown("services")}
-                  onMouseLeave={closeDropdown}
-                >
-                  <div className="px-4 mb-3 pb-3 border-b border-border/40">
-                    <TransitionLink
-                      href="/services"
-                      className="text-xs font-black uppercase tracking-widest text-[#DC5817] hover:underline"
-                    >
-                      View All Services →
-                    </TransitionLink>
-                  </div>
-                  <div className="grid grid-cols-2 gap-1 px-2">
-                    {serviceLinks.map((link) => (
+                  About
+                  <svg
+                    className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {activeDropdown === "about" && (
+                  <div
+                    className="absolute top-full left-0 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-3 min-w-[180px] z-50"
+                    onMouseEnter={() => openDropdown("about")}
+                    onMouseLeave={closeDropdown}
+                  >
+                    {aboutLinks.map((link) => (
                       <TransitionLink
                         key={link.href}
                         href={link.href}
-                        className={`block px-4 py-2.5 text-sm font-bold rounded-xl transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
+                        className={`block px-5 py-3 text-sm font-bold transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
                           pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
                         }`}
                       >
@@ -332,49 +375,98 @@ const Navbar = () => {
                       </TransitionLink>
                     ))}
                   </div>
-                </div>
-              )}
+                )}
+              </div>
+
+              {/* Services Dropdown */}
+              <div
+                className="relative"
+                data-menu-item
+                onMouseEnter={() => openDropdown("services")}
+                onMouseLeave={closeDropdown}
+                data-active={isActive("/services") ? "" : undefined}
+              >
+                <button
+                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-4 py-2.5 rounded-2xl ${
+                    isActive("/services")
+                      ? "text-foreground"
+                      : "text-foreground/70 hover:text-foreground"
+                  }`}
+                >
+                  Services
+                  <svg
+                    className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "services" ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {activeDropdown === "services" && (
+                  <div
+                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-4 z-50 w-[680px]"
+                    onMouseEnter={() => openDropdown("services")}
+                    onMouseLeave={closeDropdown}
+                  >
+                    <div className="px-4 mb-3 pb-3 border-b border-border/40">
+                      <TransitionLink
+                        href="/services"
+                        className="text-xs font-black uppercase tracking-widest text-[#DC5817] hover:underline"
+                      >
+                        View All Services →
+                      </TransitionLink>
+                    </div>
+                    <div className="grid grid-cols-2 gap-1 px-2">
+                      {serviceLinks.map((link) => (
+                        <TransitionLink
+                          key={link.href}
+                          href={link.href}
+                          className={`block px-4 py-2.5 text-sm font-bold rounded-xl transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
+                            pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
+                          }`}
+                        >
+                          {link.label}
+                        </TransitionLink>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Projects */}
+              <TransitionLink
+                href="/projects"
+                data-menu-item
+                data-active={isActive("/projects") ? "" : undefined}
+                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-4 py-2.5 rounded-2xl ${
+                  isActive("/projects")
+                    ? "text-foreground"
+                    : "text-foreground/70 hover:text-foreground"
+                }`}
+              >
+                Projects
+              </TransitionLink>
             </div>
-
-            <TransitionLink
-              href="/projects"
-              className={`text-sm font-bold transition-colors tracking-tight ${
-                isActive("/projects")
-                  ? "text-[#13642C]"
-                  : transparent
-                    ? "text-white"
-                    : "text-foreground"
-              }`}
-            >
-              Projects
-            </TransitionLink>
-
-            <TransitionLink
-              href="/partners"
-              className={`text-sm font-bold transition-colors tracking-tight ${
-                isActive("/partners")
-                  ? "text-[#13642C]"
-                  : transparent
-                    ? "text-white"
-                    : "text-foreground"
-              }`}
-            >
-              Partners
-            </TransitionLink>
           </div>
 
           {/* CTA + Mobile toggle */}
           <div className="flex items-center gap-4">
-            <TransitionLink
-              href="/contact"
-              className={`hidden lg:inline-flex items-center font-bold px-7 py-2.5 rounded-md text-sm transition-all hover:scale-105 ${
-                transparent
-                  ? "border border-white/40 text-white hover:bg-white/10 backdrop-blur-sm"
-                  : "bg-[#DC5817] hover:bg-[#C44D14] text-white shadow-lg shadow-[#DC5817]/20"
-              }`}
+            {/* <TransitionLink href="/contact" className={`hidden md:block`}>
+              <MaskButton text="Contact Us" backgroundColor="#fd7435" />
+            </TransitionLink> */}
+
+            <FluidButton 
+              href="/contact" 
+              className="hidden md:inline-flex"
             >
               Contact Us
-            </TransitionLink>
+            </FluidButton>
 
             {/* Hamburger — 3 animated bars */}
             <button

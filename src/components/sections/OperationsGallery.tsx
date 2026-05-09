@@ -36,7 +36,7 @@ const OperationsGallery = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-24 bg-transparent overflow-hidden">
+    <section ref={containerRef} className="relative py-16 md:py-24 bg-transparent overflow-hidden">
       <svg
         className="hidden absolute inset-0 w-full h-full pointer-events-none"
         preserveAspectRatio="xMidYMid slice"

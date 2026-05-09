@@ -128,7 +128,7 @@ const Services = () => {
   );
 
   return (
-    <section className="relative py-24 bg-transparent overflow-hidden" ref={containerRef}>
+    <section className="relative py-16 md:py-24 bg-transparent overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 max-w-7xl">
         
         {/* Section Heading */}

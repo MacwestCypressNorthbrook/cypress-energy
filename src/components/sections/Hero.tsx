@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import TransitionLink from "@/components/TransitionLink";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "@/context/LoadingContext";
+import { useIsMobile } from "@/hooks/use-mobile";
+import MaskButton from "../MaskButton";
+import TransitionLink from "../TransitionLink";
+import FluidButton from "../FluidButton";
 
 const slides = [
   {
     heading: "Powering West Africa's Offshore Operations",
-    ctaLabel: "View Our Projects",
+    ctaLabel: "Projects",
     ctaHref: "/projects",
     image: "/images/cp-3.jpeg",
   },
@@ -28,11 +31,12 @@ const slides = [
 ];
 
 const Hero = () => {
-  const [current, setCurrent] = useState(0);
   const [introDone, setIntroDone] = useState(false);
   const { isLoaded } = useLoading();
   const containerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
@@ -86,36 +90,45 @@ const Hero = () => {
     { scope: containerRef, dependencies: [isLoaded] },
   );
 
-  // Auto-slide effect (Only starts after intro is done)
+  // Draw SVG line from hero container bottom to button bottom after intro
   useEffect(() => {
-    if (!introDone) return;
-    const timer = setInterval(() => {
-      setCurrent((c) => (c + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, [introDone]);
+    if (!introDone || !svgRef.current || !buttonRef.current || !containerRef.current) return;
 
-  // Handle slide transitions with word-level animation
-  useEffect(() => {
-    if (!headingRef.current || !introDone) return;
+    const button = buttonRef.current;
+    const container = containerRef.current;
+    const svg = svgRef.current;
 
-    const words = headingRef.current?.querySelectorAll(".word-inner");
-    if (words) {
-      // Small flicker fix: ensure they are hidden before the transition starts
-      gsap.set(words, { y: "100%", rotateX: -10 });
+    // Get positions relative to container
+    const buttonRect = button.getBoundingClientRect();
+    const containerRect = container.getBoundingClientRect();
 
-      gsap.to(words, {
-        y: "0%",
-        rotateX: 0,
-        duration: 1.2,
-        stagger: 0.04,
-        ease: "expo.out",
-        clearProps: "all",
+    const buttonBottomX = buttonRect.left - containerRect.left + buttonRect.width / 2;
+    const buttonBottomY = buttonRect.bottom - containerRect.top;
+    const containerBottomY = containerRect.height;
+
+    // Update path - from container bottom to button bottom
+    const path = svg.querySelector("path") as SVGPathElement;
+    if (path) {
+      path.setAttribute(
+        "d",
+        `M ${buttonBottomX} ${containerBottomY - 30} L ${buttonBottomX} ${buttonBottomY + 20}`,
+      );
+
+      const pathLength = path.getTotalLength();
+      gsap.set(path, {
+        strokeDasharray: pathLength,
+        strokeDashoffset: pathLength,
+      });
+
+      gsap.to(path, {
+        strokeDashoffset: 0,
+        duration: 3,
+        ease: "linear",
       });
     }
-  }, [current, introDone]);
+  }, [introDone]);
 
-  const slide = slides[current];
+  const slide = slides[0];
 
   const splitWords = (text: string) => {
     return text.split(" ").map((word, i) => (
@@ -127,25 +140,55 @@ const Hero = () => {
     ));
   };
 
+  const isMobile = useIsMobile();
+
   return (
     <section className="bg-transparent pt-0 md:pt-4 pb-6 px-0 md:px-4" ref={containerRef}>
-      <div className="relative w-full rounded-none md:rounded-[3rem] overflow-hidden min-h-[92vh] flex items-center justify-center bg-black">
-        {/* Slides Wrapper for Zoom Effect */}
+      {/* SVG for the connecting line animation */}
+      <svg
+        ref={svgRef}
+        className="absolute inset-0 w-full h-full pointer-events-none z-20"
+        style={{ top: 0, left: 0 }}
+      >
+        <path stroke="#DC5817" strokeWidth="2" fill="none" />
+      </svg>
+
+      {/* Hidden SVG — defines the clip shape */}
+      <svg
+        width="0"
+        height="0"
+        style={{ position: "absolute", display: "block", overflow: "hidden" }}
+      >
+        <defs>
+          {/* Desktop — 1285 × 693 artboard */}
+          <clipPath
+            id="hero-clip-desktop"
+            clipPathUnits="objectBoundingBox"
+            transform="scale(0.000778816, 0.001442997)"
+          >
+            {/* <path d="M33.51,692.5c-18.2,0-33.01-14.81-33.01-33.01V33.51C.5,15.31,15.31.5,33.51.5h1217.98c18.2,0,33.01,14.81,33.01,33.01v545.98c0,18.2-14.81,33.01-33.01,33.01h-69.98c-18.75,0-34.01,15.26-34.01,34.01v12.98c0,18.2-14.81,33.01-33.01,33.01H33.51Z" /> */}
+            <path d="M20.65,686.12c-11.11,0-20.14-8.61-20.14-19.19V19.67C.51,9.09,9.54.48,20.65.48h351.28c9.21,0,17.23,5.94,19.51,14.43l4.26,15.86c2.4,8.93,10.83,15.15,20.5,15.15h436.62c9.68,0,18.1-6.24,20.5-15.15l4.26-15.86c2.28-8.5,10.3-14.43,19.51-14.43h364.48c11.11,0,20.14,8.61,20.14,19.19v647.25c0,10.58-9.04,19.19-20.14,19.19H20.65Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <div
+        style={!isMobile ? { clipPath: "url(#hero-clip-desktop)" } : {}}
+        className={`relative w-full h-[80vh] md:h-screen flex items-center justify-center bg-black overflow-hidden ${
+          isMobile ? "rounded-b-[1.5rem]" : ""
+        }`}
+      >
+        {/* Single Image Background */}
         <div className="hero-bg-zoom absolute inset-0">
-          {slides.map((s, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-                i === current ? "opacity-100" : "opacity-0"
-              }`}
-              style={{
-                backgroundImage: `url('${s.image}')`,
-              }}
-            />
-          ))}
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url('${slide.image}')`,
+            }}
+          />
         </div>
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-linear-to-b from-black/40 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/10 via-black/60 to-black/80" />
 
         {/* Content - Hidden by default to prevent flickering */}
         <div
@@ -160,43 +203,21 @@ const Hero = () => {
             </div> */}
             <h1
               ref={headingRef}
-              className="text-[clamp(1.5rem,7vw,2.75rem)] md:text-7xl font-black text-white leading-[1.1] md:leading-none tracking-tight uppercase max-w-4xl md:max-w-6xl mx-auto flex flex-wrap justify-center"
+              className="text-[clamp(1.5rem,7vw,2.75rem)] md:text-5xl font-black text-white leading-[1.1] md:leading-none tracking-tight uppercase max-w-4xl md:max-w-6xl mx-auto flex flex-wrap justify-center"
             >
               {splitWords(slide.heading)}
             </h1>
           </div>
 
           <div className="hero-content-up flex flex-wrap items-center justify-center gap-4">
-            <TransitionLink
-              href={slide.ctaHref}
-              className="inline-flex items-center gap-3 bg-[#DC5817] hover:bg-[#C44D14] text-white font-black px-10 py-5 rounded-lg text-xs md:text-sm transition-all hover:scale-105 shadow-2xl shadow-[#DC5817]/40 uppercase tracking-widest"
-            >
-              {slide.ctaLabel}
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2.5}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </TransitionLink>
-          </div>
+            <div ref={buttonRef}>
+              {/* <PremiumButton href={slide.ctaHref} label={slide.ctaLabel} /> */}
+              {/* <MaskButton text="Contact Us" backgroundColor="#fd7435" /> */}
 
-          {/* Slide indicators */}
-          <div className="hero-content-up flex items-center gap-3">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  if (introDone) setCurrent(i);
-                }}
-                className={`transition-all duration-300 rounded-full ${
-                  i === current ? "w-12 h-1.5 bg-white" : "w-6 h-1.5 bg-white/20 hover:bg-white/40"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
+              <FluidButton href={slide.ctaHref} className="hidden md:inline-flex">
+                {slide.ctaLabel}
+              </FluidButton>
+            </div>
           </div>
         </div>
       </div>

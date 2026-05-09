@@ -124,7 +124,7 @@ const AboutUs = () => {
   };
 
   return (
-    <section className="py-24 bg-transparent" ref={containerRef}>
+    <section className="py-16 md:py-24 bg-transparent" ref={containerRef}>
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* LEFT — text content */}

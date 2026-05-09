@@ -54,7 +54,7 @@ const QHSEPerformance = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-12 bg-transparent overflow-hidden">
+    <section ref={containerRef} className="relative py-10 md:py-12 bg-transparent overflow-hidden">
       {/* SAME blueprint grid style */}
       <svg
         className="hidden absolute inset-0 w-full h-full pointer-events-none"
@@ -103,7 +103,7 @@ const QHSEPerformance = () => {
             </h2>
           </div>
 
-          <button className="inline-flex items-center gap-3 bg-[#13642C] hover:bg-[#0f4f22] text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all hover:scale-105 shadow-lg shadow-[#13642C]/20">
+          <button className="inline-flex items-center gap-3 bg-[#DC5817] hover:bg-[#C44D14] text-white font-bold px-8 py-3.5 rounded-xl text-sm transition-all hover:scale-105 shadow-lg shadow-[#DC5817]/20">
             View Details
           </button>
         </div>
