@@ -304,7 +304,7 @@ const Navbar = () => {
             {/* Pill-shaped Navigation Container */}
             <div
               ref={navPillRef}
-              className="relative bg-white/0 backdrop-blur-sm rounded-2xl p-1 flex items-center gap-8"
+              className="scale-85 relative bg-white/0 backdrop-blur-sm rounded-2xl p-1 flex items-center gap-8"
             >
               {/* Animated white pill background */}
               <div

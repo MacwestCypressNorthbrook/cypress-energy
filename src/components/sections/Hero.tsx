@@ -5,8 +5,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "@/context/LoadingContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import MaskButton from "../MaskButton";
-import TransitionLink from "../TransitionLink";
 import FluidButton from "../FluidButton";
 
 const slides = [
@@ -164,9 +162,9 @@ const Hero = () => {
           <clipPath
             id="hero-clip-desktop"
             clipPathUnits="objectBoundingBox"
-            transform="scale(0.000778816, 0.001442997)"
+            // transform="scale(0.000778816, 0.001442997)"
+            transform="scale(0.00078, 0.001442997)"
           >
-            {/* <path d="M33.51,692.5c-18.2,0-33.01-14.81-33.01-33.01V33.51C.5,15.31,15.31.5,33.51.5h1217.98c18.2,0,33.01,14.81,33.01,33.01v545.98c0,18.2-14.81,33.01-33.01,33.01h-69.98c-18.75,0-34.01,15.26-34.01,34.01v12.98c0,18.2-14.81,33.01-33.01,33.01H33.51Z" /> */}
             <path d="M20.65,686.12c-11.11,0-20.14-8.61-20.14-19.19V19.67C.51,9.09,9.54.48,20.65.48h351.28c9.21,0,17.23,5.94,19.51,14.43l4.26,15.86c2.4,8.93,10.83,15.15,20.5,15.15h436.62c9.68,0,18.1-6.24,20.5-15.15l4.26-15.86c2.28-8.5,10.3-14.43,19.51-14.43h364.48c11.11,0,20.14,8.61,20.14,19.19v647.25c0,10.58-9.04,19.19-20.14,19.19H20.65Z" />
           </clipPath>
         </defs>
