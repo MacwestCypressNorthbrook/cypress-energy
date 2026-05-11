@@ -78,7 +78,7 @@ const QHSEPolicy = () => {
       </svg>
 
       <div className="relative z-10 container mx-auto px-4 max-w-7xl">
-        <div className="qhse-policy-card bg-white rounded-[3rem] p-10 md:p-14 shadow-sm flex flex-col lg:flex-row items-center gap-12">
+        <div className="qhse-policy-card bg-white rounded-[1.5rem] p-10 md:p-14 shadow-sm flex flex-col lg:flex-row items-center gap-12">
           {/* LEFT CONTENT */}
           <div className="lg:w-1/2 space-y-6 text-center lg:text-left">
             <div className="qhse-policy-heading space-y-2">

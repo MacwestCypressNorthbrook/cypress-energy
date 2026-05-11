@@ -64,13 +64,10 @@ const Navbar = () => {
     };
 
     const animateToPill = (item: HTMLElement, duration = 0.4) => {
-      const navRect = navPill.getBoundingClientRect();
-      const itemRect = item.getBoundingClientRect();
-
-      const x = itemRect.left - navRect.left;
-      const y = itemRect.top - navRect.top;
-      const width = itemRect.width;
-      const height = itemRect.height;
+      const x = item.offsetLeft;
+      const y = item.offsetTop;
+      const width = item.offsetWidth;
+      const height = item.offsetHeight;
 
       gsap.to(pillBg, {
         x: x,
@@ -320,7 +317,7 @@ const Navbar = () => {
                 href="/"
                 data-menu-item
                 data-active={pathname === "/" ? "" : undefined}
-                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-4 py-2.5 rounded-2xl ${
+                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
                   pathname === "/" ? "text-foreground" : "text-foreground/70 hover:text-foreground"
                 }`}
               >
@@ -336,7 +333,7 @@ const Navbar = () => {
                 data-active={isActive("/about") || isActive("/management") ? "" : undefined}
               >
                 <button
-                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-4 py-2.5 rounded-2xl ${
+                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
                     isActive("/about") || isActive("/management")
                       ? "text-foreground"
                       : "text-foreground/70 hover:text-foreground"
@@ -387,7 +384,7 @@ const Navbar = () => {
                 data-active={isActive("/services") ? "" : undefined}
               >
                 <button
-                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-4 py-2.5 rounded-2xl ${
+                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
                     isActive("/services")
                       ? "text-foreground"
                       : "text-foreground/70 hover:text-foreground"
@@ -444,7 +441,7 @@ const Navbar = () => {
                 href="/projects"
                 data-menu-item
                 data-active={isActive("/projects") ? "" : undefined}
-                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-4 py-2.5 rounded-2xl ${
+                className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
                   isActive("/projects")
                     ? "text-foreground"
                     : "text-foreground/70 hover:text-foreground"

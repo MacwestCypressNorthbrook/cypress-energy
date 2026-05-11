@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -51,30 +51,33 @@ const CEOMessage = () => {
             scrollTrigger: {
               trigger: quoteRef.current,
               start: "top 90%",
-              end: "bottom 60%",
-              scrub: 1.5,
+              end: "bottom 85%",
+              scrub: 1,
             },
           },
         );
       }
 
       // 3. Signature & Image Fade
-      gsap.fromTo(
-        ".ceo-sig",
-        { opacity: 0, scale: 0.9, y: 30 },
-        {
-          opacity: 1,
-          scale: 1,
-          y: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".ceo-sig",
-            start: "top 95%",
-            end: "bottom 85%",
-            scrub: 1.2,
+      const sigs = containerRef.current?.querySelectorAll(".ceo-sig");
+      sigs?.forEach((sig) => {
+        gsap.fromTo(
+          sig,
+          { opacity: 0, scale: 0.9, y: 30 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sig,
+              start: "top 95%",
+              end: "bottom 90%",
+              scrub: 1,
+            },
           },
-        },
-      );
+        );
+      });
 
       // 4. Big Quote Background
       gsap.fromTo(
@@ -106,9 +109,9 @@ const CEOMessage = () => {
   };
 
   return (
-    <section ref={containerRef} className="relative py-16 md:py-24 bg-transparent overflow-hidden">
+    <section ref={containerRef} className="relative py-16 bg-transparent overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 max-w-7xl">
-        <div className="relative bg-orange-200/5 backdrop-blur-[5px] border border-white/20 p-8 md:p-16 rounded-[3rem] shadow-[0_20px_60px_rgba(0,0,0,0.02),inset_0_0_0_1px_rgba(255,255,255,0.05)] transition-all duration-700 hover:shadow-[0_30px_80px_rgba(0,0,0,0.04)] overflow-hidden group">
+        <div className="relative bg-white p-8 rounded-[1.5rem] overflow-hidden group border border-black/3">
           {/* Shine/Reflection Effect */}
           <div className="absolute inset-0 bg-linear-to-br from-white/20 via-transparent to-transparent pointer-events-none" />
           <div className="absolute -inset-full bg-linear-to-r from-transparent via-white/10 to-transparent rotate-45 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none" />
@@ -126,7 +129,7 @@ const CEOMessage = () => {
                 <div className="absolute inset-0 border-8 border-white/10 rounded-2xl pointer-events-none" />
 
                 {/* Floating Badge */}
-                <div className="ceo-sig absolute bottom-8 right-8 bg-[#13642C] text-white p-6 rounded-2xl shadow-xl max-w-[200px]">
+                {/* <div className="ceo-sig absolute bottom-8 right-8 bg-[#13642C] text-white p-6 rounded-2xl shadow-xl max-w-[200px]">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-2 h-2 rounded-full bg-[#DC5817] animate-pulse" />
                     <span className="text-[10px] font-bold uppercase tracking-widest opacity-70">
@@ -136,7 +139,7 @@ const CEOMessage = () => {
                   <p className="text-sm font-medium italic leading-relaxed">
                     "Committed to sustainable growth across West Africa."
                   </p>
-                </div>
+                </div> */}
               </div>
             </div>
 
