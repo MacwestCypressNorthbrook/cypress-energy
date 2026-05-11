@@ -461,10 +461,7 @@ const Navbar = () => {
               <MaskButton text="Contact Us" backgroundColor="#fd7435" />
             </TransitionLink> */}
 
-            <FluidButton 
-              href="/contact" 
-              className="hidden md:inline-flex"
-            >
+            <FluidButton href="/contact" className="hidden md:inline-flex">
               Contact Us
             </FluidButton>
 

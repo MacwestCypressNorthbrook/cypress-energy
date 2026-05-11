@@ -96,7 +96,7 @@ const QHSEPolicy = () => {
 
             <TransitionLink
               href="/qhse"
-              className="inline-flex items-center gap-3 bg-[#13642C] hover:bg-[#0f4f22] text-white font-bold px-8 py-3.5 rounded-full text-sm transition-all hover:scale-105 shadow-lg shadow-[#13642C]/20"
+              className="inline-flex items-center gap-3 bg-[#082E29] hover:bg-[#0f4f22] text-white font-bold px-8 py-3.5 rounded-md text-sm transition-all hover:scale-105 shadow-lg shadow-[#13642C]/20"
             >
               Our Latest Report
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
-import TransitionLink from "@/components/TransitionLink";
+import { useRef } from "react";
 import FluidButton from "../FluidButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -66,12 +65,14 @@ const Advantage = () => {
       <div className="relative z-10 container mx-auto px-4 max-w-7xl">
         <div className="adv-heading flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
           <div className="space-y-4 max-w-2xl">
-            <p className="adv-heading-item text-xs font-bold uppercase tracking-[0.4em] text-[#13642C]">Strategic Superiority</p>
+            <p className="adv-heading-item text-xs font-bold uppercase tracking-[0.4em] text-[#13642C]">
+              Strategic Superiority
+            </p>
             <h2 className="adv-heading-item text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
               The Cypress <span className="text-foreground/20">Advantage</span>
             </h2>
           </div>
-          
+
           <div className="adv-heading-item">
             <FluidButton href="/about" className="h-14 min-w-48">
               Corporate Overview
@@ -80,31 +81,36 @@ const Advantage = () => {
         </div>
 
         {/* Staircase Grid - Items start ensures they don't stretch to same height */}
-        <div className="adv-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-start pb-12 md:pb-40">
+        <div className="adv-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 items-start pb-12">
           {advantages.map((adv, index) => {
             const green = adv.accent === "green";
-            const hoverBg = green ? "hover:bg-[#13642C]" : "hover:bg-[#DC5817]";
+            const hoverBg = green ? "hover:bg-[#082E29]" : "hover:bg-[#DC5817]";
             const hoverText = green ? "group-hover:text-[#13642C]" : "group-hover:text-[#DC5817]";
             const numColor = green ? "text-[#13642C]/20" : "text-[#DC5817]/20";
-            const accentColor = green ? "bg-[#13642C]" : "bg-[#DC5817]";
-            
+            const accentColor = green ? "bg-[#082E29]" : "bg-[#DC5817]";
+
             // Clean staircase offsets for visual separation
-            const stepClass = 
-              index === 0 ? "md:translate-y-0" : 
-              index === 1 ? "md:translate-y-12" : 
-              index === 2 ? "md:translate-y-24" : 
-              "md:translate-y-36";
+            const stepClass =
+              index === 0
+                ? "md:translate-y-0"
+                : index === 1
+                  ? "md:translate-y-12"
+                  : index === 2
+                    ? "md:translate-y-24"
+                    : "md:translate-y-36";
 
             return (
-              <div 
-                key={adv.id} 
+              <div
+                key={adv.id}
                 className={`adv-card-wrapper transition-all duration-500 ${stepClass}`}
               >
                 <div
-                  className={`adv-card group h-full bg-white rounded-[2.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-[300px] relative overflow-hidden`}
+                  className={`adv-card group h-full bg-white rounded-[0.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-[300px] relative overflow-hidden`}
                 >
                   {/* Colored Top Border Accent */}
-                  <div className={`absolute top-0 left-0 w-full h-[4px] ${accentColor} opacity-80`} />
+                  <div
+                    className={`absolute top-0 left-0 w-full h-[4px] ${accentColor} opacity-80`}
+                  />
 
                   <div className="space-y-4 pt-2">
                     <span

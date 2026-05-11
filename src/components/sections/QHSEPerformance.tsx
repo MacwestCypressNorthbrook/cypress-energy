@@ -112,14 +112,14 @@ const QHSEPerformance = () => {
         <div className="qhse-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, i) => {
             const green = stat.accent === "green";
-            const hoverBg = green ? "hover:bg-[#13642C]" : "hover:bg-[#DC5817]";
+            const hoverBg = green ? "hover:bg-[#082E29]" : "hover:bg-[#DC5817]";
             const hoverText = green ? "group-hover:text-[#13642C]" : "group-hover:text-[#DC5817]";
             const numColor = green ? "text-[#13642C]/20" : "text-[#DC5817]/20";
 
             return (
               <div
                 key={i}
-                className={`qhse-card group bg-white rounded-[2.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-65`}
+                className={`qhse-card group bg-white rounded-[0.5rem] p-10 shadow-sm ${hoverBg} hover:shadow-xl transition-all duration-500 flex flex-col justify-between min-h-65`}
               >
                 <div className="space-y-4">
                   <span

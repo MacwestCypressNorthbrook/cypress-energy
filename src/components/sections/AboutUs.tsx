@@ -33,7 +33,7 @@ const AboutUs = () => {
               end: "bottom 70%",
               scrub: 1,
             },
-          }
+          },
         );
       }
 
@@ -53,7 +53,7 @@ const AboutUs = () => {
             end: "bottom 60%",
             scrub: 1,
           },
-        }
+        },
       );
 
       // 3. Image Reveal with Clip-Path
@@ -71,7 +71,7 @@ const AboutUs = () => {
             end: "bottom 70%",
             scrub: 1,
           },
-        }
+        },
       );
 
       // 4. Bento Boxes Sequential Reveal
@@ -91,7 +91,7 @@ const AboutUs = () => {
             end: "bottom 80%",
             scrub: 1,
           },
-        }
+        },
       );
 
       // 5. ISO Badge Reveal
@@ -109,10 +109,10 @@ const AboutUs = () => {
             end: "bottom 85%",
             scrub: 1,
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const splitHeading = (text: string) => {
@@ -135,7 +135,7 @@ const AboutUs = () => {
                   <span className="w-1.5 h-1.5 rounded-full bg-[#13642C]" />
                   Who We Are
                 </p>
-                <h2 
+                <h2
                   ref={headingRef}
                   className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-none overflow-hidden"
                 >
@@ -220,7 +220,7 @@ const AboutUs = () => {
             {/* Bottom Row */}
             <div className="bento-boxes-row grid grid-cols-1 sm:grid-cols-2 gap-6 flex-1">
               {/* Bottom Left — 10+ Years */}
-              <div className="bento-box-extra bg-[#0b1f10] rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center text-white">
+              <div className="bento-box-extra bg-[#082E29] rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-center text-white">
                 <div className="flex items-start">
                   <div className="text-7xl md:text-8xl font-black leading-none">10</div>
                   <div className="text-4xl text-[#13642C] font-black leading-none">+</div>
@@ -260,4 +260,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-
