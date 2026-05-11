@@ -61,9 +61,9 @@ const Advantage = () => {
   );
 
   return (
-    <section ref={containerRef} className="relative py-16 md:py-32 bg-transparent overflow-hidden">
+    <section ref={containerRef} className="relative py-16 bg-transparent overflow-hidden">
       <div className="relative z-10 container mx-auto px-4 max-w-7xl">
-        <div className="adv-heading flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+        <div className="adv-heading flex flex-col md:flex-row justify-between items-end mb-10 gap-12">
           <div className="space-y-4 max-w-2xl">
             <p className="adv-heading-item text-xs font-bold uppercase tracking-[0.4em] text-[#13642C]">
               Strategic Superiority
