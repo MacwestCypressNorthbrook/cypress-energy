@@ -297,7 +297,7 @@ const Navbar = () => {
           </TransitionLink>
 
           {/* Desktop Nav */}
-          <div className="hidden absolute left-1/2 top-0 transform -translate-x-1/2 translate-y-1/5 lg:flex items-center gap-0">
+          <div className="hidden absolute left-[49%] top-0 transform -translate-x-1/2 translate-y-1/5 lg:flex items-center gap-0">
             {/* Pill-shaped Navigation Container */}
             <div
               ref={navPillRef}
