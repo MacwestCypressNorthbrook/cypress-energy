@@ -31,33 +31,29 @@ export default function EditorialGrid() {
 
   useGSAP(
     () => {
-      const cards = gsap.utils.toArray(".service-card");
-
-      cards.forEach((card: any, i) => {
-        const size = getCardSize(i);
-        const duration = size === "full" ? 1 : size === "lg" || size === "md" ? 0.8 : 0.7;
-        
-        gsap.fromTo(
-          card,
-          {
-            y: 40,
-            scale: 0.8,
-            opacity: 0,
-          },
-          {
-            y: 0,
-            scale: 1,
-            opacity: 1,
-            duration: duration,
-            ease: "back.out(1.5)",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 100%",
-              once: true,
+      ScrollTrigger.batch(".service-card", {
+        onEnter: (batch) => {
+          gsap.fromTo(
+            batch,
+            {
+              y: 40,
+              scale: 0.9,
+              opacity: 0,
             },
-            delay: (i % 3) * 0.02,
-          },
-        );
+            {
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "back.out(1.5)",
+              force3D: true,
+              overwrite: true,
+            },
+          );
+        },
+        start: "top 100%",
+        fastScrollEnd: true,
       });
     },
     { scope: containerRef },

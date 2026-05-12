@@ -44,11 +44,12 @@ export default function ServiceCard({
           y: 60,
           scale: 1.2,
           ease: "none",
+          force3D: true,
           scrollTrigger: {
             trigger: containerRef.current,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1, // Smoother scrub
           },
         });
       }
@@ -59,17 +60,18 @@ export default function ServiceCard({
           trigger: containerRef.current,
           start: "top 100%",
           toggleActions: "play none none none",
+          fastScrollEnd: true,
         },
       });
 
       tl.fromTo(
         ".card-title",
         { y: 30, opacity: 0, scale: 0.8 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.5)" },
+        { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: "back.out(1.5)", force3D: true },
       ).fromTo(
         ".card-description",
         { y: 15, opacity: 0, scale: 0.9 },
-        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" },
+        { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)", force3D: true },
         "-=0.5",
       );
     },
@@ -81,6 +83,7 @@ export default function ServiceCard({
       y: -15,
       duration: 0.4,
       ease: "power3.out",
+      force3D: true,
     });
     gsap.to(".card-icon", {
       x: 8,
@@ -88,12 +91,14 @@ export default function ServiceCard({
       scale: 1.1,
       duration: 0.3,
       ease: "power2.out",
+      force3D: true,
     });
     if (imageRef.current) {
       gsap.to(imageRef.current, {
-        scale: 1.2,
+        scale: 1.25,
         duration: 0.8,
         ease: "power2.out",
+        force3D: true,
       });
     }
   };
@@ -103,6 +108,7 @@ export default function ServiceCard({
       y: 0,
       duration: 0.4,
       ease: "power3.out",
+      force3D: true,
     });
     gsap.to(".card-icon", {
       x: 0,
@@ -110,12 +116,14 @@ export default function ServiceCard({
       scale: 1,
       duration: 0.3,
       ease: "power2.out",
+      force3D: true,
     });
     if (imageRef.current) {
       gsap.to(imageRef.current, {
-        scale: 1.1, // Back to parallax base scale
+        scale: 1.2, // Back to parallax base scale
         duration: 0.8,
         ease: "power2.out",
+        force3D: true,
       });
     }
   };
@@ -127,7 +135,7 @@ export default function ServiceCard({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "service-card group relative overflow-hidden flex flex-col rounded-[2rem] transition-all duration-700 bg-[#F8F9FA] hover:shadow-2xl",
+        "service-card group relative overflow-hidden flex flex-col rounded-[2rem] transition-all duration-700 bg-[#F8F9FA] hover:shadow-2xl will-change-transform",
         size === "full" && "md:col-span-12 aspect-4/5 md:aspect-24/10",
         size === "lg" && "md:col-span-8 aspect-4/5 md:aspect-16/10",
         size === "md" && "md:col-span-7 aspect-4/5 md:aspect-14/10",
@@ -139,8 +147,8 @@ export default function ServiceCard({
     >
       {/* Background Image (if not text-only) */}
       {!isTextOnly && image && (
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <img ref={imageRef} src={image} alt={title} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 z-0 overflow-hidden gpu-accelerated">
+          <img ref={imageRef} src={image} alt={title} className="w-full h-full object-cover will-change-transform" />
           <div className="absolute inset-0 bg-linear-to-b from-black/5 to-black/60 group-hover:to-black/80 transition-all duration-700" />
         </div>
       )}

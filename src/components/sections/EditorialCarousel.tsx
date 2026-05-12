@@ -62,11 +62,13 @@ export default function EditorialCarousel() {
           y: 60,
           scale: 1.2,
           ease: "none",
+          force3D: true,
           scrollTrigger: {
             trigger: img,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 1,
+            fastScrollEnd: true,
           },
         });
       });
@@ -101,7 +103,7 @@ export default function EditorialCarousel() {
                 key={i}
                 href={`/services/${service.slug}`}
                 className={cn(
-                  "alliance-card group relative overflow-hidden flex flex-col rounded-[2rem] bg-white transition-all duration-700 hover:shadow-2xl",
+                  "alliance-card group relative overflow-hidden flex flex-col rounded-[2rem] bg-white transition-all duration-700 hover:shadow-2xl will-change-transform",
                   size === "full" && "md:col-span-12 aspect-4/5 md:aspect-24/10",
                   size === "lg" && "md:col-span-8 aspect-4/5 md:aspect-16/10",
                   size === "md" && "md:col-span-7 aspect-4/5 md:aspect-14/10",
@@ -109,11 +111,11 @@ export default function EditorialCarousel() {
                   size === "portrait" && "md:col-span-4 aspect-4/5",
                 )}
               >
-                <div className="absolute inset-0 z-0 overflow-hidden">
+                <div className="absolute inset-0 z-0 overflow-hidden gpu-accelerated">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="alliance-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110"
+                    className="alliance-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-110 will-change-transform"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
                 </div>

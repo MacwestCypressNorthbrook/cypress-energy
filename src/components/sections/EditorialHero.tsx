@@ -89,10 +89,11 @@ export default function EditorialHero({ title, subtitle, image }: EditorialHeroP
     const y = e.clientY - rect.top - rect.height / 2;
 
     gsap.to(ctaInnerRef.current, {
-      x: x * 0.45,
-      y: y * 0.45,
+      x: x * 0.35,
+      y: y * 0.35,
       duration: 0.4,
       ease: "power2.out",
+      force3D: true,
     });
   };
 
@@ -102,11 +103,12 @@ export default function EditorialHero({ title, subtitle, image }: EditorialHeroP
       y: 0,
       duration: 0.6,
       ease: "elastic.out(1, 0.4)",
+      force3D: true,
     });
   };
 
   const splitTitle = title.split("").map((char, i) => (
-    <span key={i} className="char inline-block whitespace-pre">
+    <span key={i} className="char inline-block whitespace-pre will-change-transform">
       {char}
     </span>
   ));
@@ -137,9 +139,9 @@ export default function EditorialHero({ title, subtitle, image }: EditorialHeroP
         <div className="relative">
           <div
             ref={imageRef}
-            className="relative aspect-video md:aspect-24/10 overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-muted shadow-2xl"
+            className="relative aspect-video md:aspect-24/10 overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-muted shadow-2xl gpu-accelerated"
           >
-            <img src={image} alt={title} className="w-full h-full object-cover" />
+            <img src={image} alt={title} className="w-full h-full object-cover will-change-transform" />
             <div className="absolute inset-0 bg-linear-to-b from-transparent to-black/20" />
           </div>
 
