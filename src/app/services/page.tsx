@@ -1,137 +1,107 @@
 "use client";
 
 import React, { useRef } from "react";
-import TransitionLink from "@/components/TransitionLink";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import PageHero from "@/components/layout/PageHero";
-import { services } from "@/lib/services-data";
+import EditorialHero from "@/components/sections/EditorialHero";
+import EditorialGrid from "@/components/sections/EditorialGrid";
+import FeatureDiagram from "@/components/sections/FeatureDiagram";
+import EditorialCarousel from "@/components/sections/EditorialCarousel";
+import EditorialTestimonials from "@/components/sections/EditorialTestimonials";
+import TransitionLink from "@/components/TransitionLink";
+import { MoveRight } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function ServicesPage() {
-  const gridRef = useRef<HTMLDivElement>(null);
+  const pageRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
-      gsap.fromTo(
-        ".service-hub-card",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          stagger: 0.07,
-          ease: "power2.out",
-          scrollTrigger: { trigger: gridRef.current, start: "top 82%", once: true },
-        },
-      );
+      // Global Page Fade-in
+      gsap.to(pageRef.current, {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power1.out",
+      });
+
+      // Optional: Pinning for technical showcase if desired
+      // But based on the prompt, "Consider pinning one major section briefly"
+      // I'll add a slight pinning effect to FeatureDiagram to make it feel immersive
     },
-    { scope: gridRef },
+    { scope: pageRef }
   );
 
   return (
-    <main className="min-h-screen">
+    <main ref={pageRef} className="page-fade-in min-h-screen bg-white selection:bg-[#DC5817]/30">
       <Navbar />
 
-      <PageHero
-        title="Our Services"
-        subtitle="Cypress Energy delivers integrated offshore and onshore support solutions tailored to the upstream oil and gas industry in West Africa."
-        image="/images/1H6A2856-1-scaled.jpeg"
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Our Services", href: "/services" },
-        ]}
+      {/* Cinematic Hero */}
+      <EditorialHero 
+        title="Integrated Energy Solutions"
+        subtitle="Cypress Energy delivers world-class offshore and onshore support solutions tailored to the complex needs of the oil and gas industry in West Africa."
+        image="/images/services/offshore vessel supply.avif"
       />
 
-      {/* Services Grid */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="mb-14 space-y-3">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
-              Explore All <span className="text-foreground/15">Services</span>
-            </h2>
-          </div>
+      {/* Asymmetric Modular Grid */}
+      <EditorialGrid />
 
-          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <TransitionLink
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="service-hub-card group bg-[#F8F9FA] rounded-[2.5rem] overflow-hidden hover:shadow-xl transition-all duration-500"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
-                <div className="p-8 space-y-4">
-                  <div className="flex items-start justify-between">
-                    <span className="text-xs font-black text-foreground/20 group-hover:text-[#DC5817]/30 transition-colors">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <div className="w-9 h-9 rounded-full border border-border flex items-center justify-center group-hover:bg-[#DC5817] group-hover:border-[#DC5817] transition-all duration-300">
-                      <svg
-                        className="w-4 h-4 text-foreground/40 group-hover:text-white group-hover:rotate-45 transition-all"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M14 5l7 7m0 0l-7 7m7-7H3"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-black uppercase tracking-tight group-hover:text-[#DC5817] transition-colors leading-tight">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground font-medium leading-relaxed line-clamp-2">
-                    {service.intro[0]}
-                  </p>
-                </div>
-              </TransitionLink>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Technical Showcase */}
+      <FeatureDiagram />
 
-      {/* CTA banner */}
-      <section className="py-24 bg-[#F8F9FA]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="bg-black rounded-[3rem] p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="text-center md:text-left space-y-4 max-w-xl">
-              <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight">
-                Need a bespoke solution?
+      {/* Horizontal Scrolling Features / Case Studies */}
+      <EditorialCarousel />
+
+      {/* Asymmetric Testimonials */}
+      <EditorialTestimonials />
+
+      {/* Final Editorial CTA */}
+      <section className="py-16 md:py-32 bg-white border-t border-black/5">
+        <div className="container mx-auto px-6 md:px-12 max-w-[1440px]">
+          <div className="asymmetric-grid-cols-12 gap-12 items-center flex flex-col md:grid">
+            <div className="md:col-span-7">
+              <h2 className="text-5xl md:text-[7rem] font-display font-light uppercase tracking-tighter leading-[0.85] text-black mb-12">
+                Ready to <span className="block italic text-[#DC5817]/40">Elevate</span> Your Operations?
               </h2>
-              <p className="text-white/50 font-medium leading-relaxed">
-                Our technical team can design an integrated service package matched to your specific
-                operational requirements.
-              </p>
+              <div className="flex flex-col sm:flex-row gap-6">
+                <a
+                  href="https://outlook.office.com/book/TechnicalConsultation4@cypressenergyghana.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between bg-black text-white px-10 py-6 rounded-full hover:bg-[#DC5817] transition-all duration-500 min-w-[280px]"
+                >
+                  <span className="font-display font-medium uppercase tracking-widest text-sm">
+                    Book a Consultation
+                  </span>
+                  <MoveRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </a>
+                <TransitionLink
+                  href="/contact"
+                  className="group flex items-center justify-between border border-black/10 text-black px-10 py-6 rounded-full hover:bg-black hover:text-white transition-all duration-500 min-w-[280px]"
+                >
+                  <span className="font-display font-medium uppercase tracking-widest text-sm">
+                    Get in Touch
+                  </span>
+                  <MoveRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                </TransitionLink>
+              </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-              <a
-                href="https://outlook.office.com/book/TechnicalConsultation4@cypressenergyghana.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-[#DC5817] hover:bg-[#C44D14] text-white font-bold px-8 py-4 rounded-full text-sm transition-all hover:scale-105"
-              >
-                Schedule Consultation
-              </a>
-              <TransitionLink
-                href="/contact"
-                className="inline-flex items-center gap-3 border border-white/20 text-white font-bold px-8 py-4 rounded-full text-sm hover:bg-white/10 transition-all"
-              >
-                Contact Us
-              </TransitionLink>
+            
+            <div className="md:col-span-5 md:pl-12">
+              <div className="aspect-4/5 rounded-[3rem] overflow-hidden bg-muted">
+                <img 
+                  src="/images/1H6A3759-scaled.jpg" 
+                  alt="Contact" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+                />
+              </div>
+              <div className="mt-8 flex items-center justify-between opacity-40">
+                <span className="text-xs font-display font-bold uppercase tracking-[0.3em]">Cypress Energy</span>
+                <span className="text-xs font-display font-bold uppercase tracking-[0.3em]">© 2026</span>
+              </div>
             </div>
           </div>
         </div>

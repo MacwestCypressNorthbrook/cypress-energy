@@ -9,7 +9,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -142,6 +143,46 @@
 
   ::-webkit-scrollbar-button {
     display: none;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .asymmetric-grid-cols-12 {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .asymmetric-grid-cols-12 {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+  .page-fade-in {
+    opacity: 0;
+  }
+  .masked-reveal {
+    clip-path: inset(0 0 100% 0);
+  }
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  .link-underline:hover::after {
+    width: 100%;
   }
 }
 
