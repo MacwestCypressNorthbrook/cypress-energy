@@ -74,7 +74,7 @@ const ServicesHero: React.FC<ServicesHeroProps> = ({ title, subtitle, image }) =
       </div>
 
       {/* Overlapping Media Section */}
-      <div className="max-w-[1140px] mx-auto px-6 -mt-16 md:-mt-24 pb-16 md:pb-24 relative z-20">
+      <div className="max-w-[1140px] mx-auto px-6 -mt-16 md:-mt-24 pb-16 relative z-20">
         <div className="relative w-full aspect-video md:aspect-1136/584 rounded-[25px] overflow-hidden group bg-black">
           {/* Media Content */}
           <div className="parallax-media absolute inset-0 top-[-10%] h-[120%]">

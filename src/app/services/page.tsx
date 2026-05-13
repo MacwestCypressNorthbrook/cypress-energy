@@ -21,7 +21,7 @@ export default function ServicesPage() {
       />
 
       {/* Services Pods */}
-      <section className="py-20 md:py-32 relative z-10">
+      <section className="py-20 relative z-10">
         <div className="max-w-[1140px] mx-auto px-6">
           <div className="flex flex-col">
             {services.map((service, index) => (

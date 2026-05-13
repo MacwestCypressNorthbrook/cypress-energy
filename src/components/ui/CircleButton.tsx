@@ -8,6 +8,7 @@ interface CircleButtonProps {
   children: React.ReactNode;
   variant?: "primary" | "secondary";
   className?: string;
+  show?: boolean;
 }
 
 const CircleButton: React.FC<CircleButtonProps> = ({
@@ -15,6 +16,7 @@ const CircleButton: React.FC<CircleButtonProps> = ({
   children,
   variant = "primary",
   className = "",
+  show = true,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
 
@@ -36,6 +38,7 @@ const CircleButton: React.FC<CircleButtonProps> = ({
         relative inline-flex items-center min-w-[170px] px-8 pt-[10px] pb-[12px] 
         rounded-full overflow-hidden transition-all
         ${isHovered ? `${hoverBaseBg} text-white` : `${baseBg} ${textColor}`}
+        ${!show ? "opacity-0 pointer-events-none" : ""}
         ${className}
       `}
       style={{

@@ -86,6 +86,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
                 ))}
               </div>
               <CircleButton
+                show={false}
                 href={`/services/${slug}`}
                 variant="secondary"
                 className="scale-90 origin-left"
@@ -190,7 +191,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
                   </>
                 )}
 
-                <CircleButton className="hidden" href={`/services/${slug}`} variant="primary">
+                <CircleButton href={`/services/${slug}`} variant="primary" show={false}>
                   Explore
                 </CircleButton>
               </div>
