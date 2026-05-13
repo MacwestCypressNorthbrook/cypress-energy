@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import MaskButton from "../MaskButton";
 import FluidButton from "../FluidButton";
+import { devMode } from "@/lib/dev-mode";
 
 gsap.registerPlugin(useGSAP);
 
@@ -136,6 +137,7 @@ const Navbar = () => {
   }, [pathname]);
 
   const openDropdown = (name: string) => {
+    if (!devMode.navbar.showDropdowns) return;
     if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
     setActiveDropdown(name);
   };
@@ -324,107 +326,48 @@ const Navbar = () => {
                 Home
               </TransitionLink>
 
-              {/* About Dropdown */}
-              <div
-                className="relative"
-                data-menu-item
-                onMouseEnter={() => openDropdown("about")}
-                onMouseLeave={closeDropdown}
-                data-active={isActive("/about") || isActive("/management") ? "" : undefined}
-              >
-                <button
-                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
-                    isActive("/about") || isActive("/management")
-                      ? "text-foreground"
-                      : "text-foreground/70 hover:text-foreground"
-                  }`}
+              {/* About */}
+              {devMode.navbar.showDropdowns ? (
+                <div
+                  className="relative"
+                  data-menu-item
+                  onMouseEnter={() => openDropdown("about")}
+                  onMouseLeave={closeDropdown}
+                  data-active={isActive("/about") || isActive("/management") ? "" : undefined}
                 >
-                  About
-                  <svg
-                    className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <button
+                    className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
+                      isActive("/about") || isActive("/management")
+                        ? "text-foreground"
+                        : "text-foreground/70 hover:text-foreground"
+                    }`}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {activeDropdown === "about" && (
-                  <div
-                    className="absolute top-full left-0 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-3 min-w-[180px] z-50"
-                    onMouseEnter={() => openDropdown("about")}
-                    onMouseLeave={closeDropdown}
-                  >
-                    {aboutLinks.map((link) => (
-                      <TransitionLink
-                        key={link.href}
-                        href={link.href}
-                        className={`block px-5 py-3 text-sm font-bold transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
-                          pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
-                        }`}
-                      >
-                        {link.label}
-                      </TransitionLink>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Services Dropdown */}
-              <div
-                className="relative"
-                data-menu-item
-                onMouseEnter={() => openDropdown("services")}
-                onMouseLeave={closeDropdown}
-                data-active={isActive("/services") ? "" : undefined}
-              >
-                <button
-                  className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
-                    isActive("/services")
-                      ? "text-foreground"
-                      : "text-foreground/70 hover:text-foreground"
-                  }`}
-                >
-                  Services
-                  <svg
-                    className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "services" ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                {activeDropdown === "services" && (
-                  <div
-                    className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-4 z-50 w-[680px]"
-                    onMouseEnter={() => openDropdown("services")}
-                    onMouseLeave={closeDropdown}
-                  >
-                    <div className="px-4 mb-3 pb-3 border-b border-border/40">
-                      <TransitionLink
-                        href="/services"
-                        className="text-xs font-black uppercase tracking-widest text-[#DC5817] hover:underline"
-                      >
-                        View All Services →
-                      </TransitionLink>
-                    </div>
-                    <div className="grid grid-cols-2 gap-1 px-2">
-                      {serviceLinks.map((link) => (
+                    About
+                    <svg
+                      className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  {activeDropdown === "about" && (
+                    <div
+                      className="absolute top-full left-0 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-3 min-w-[180px] z-50"
+                      onMouseEnter={() => openDropdown("about")}
+                      onMouseLeave={closeDropdown}
+                    >
+                      {aboutLinks.map((link) => (
                         <TransitionLink
                           key={link.href}
                           href={link.href}
-                          className={`block px-4 py-2.5 text-sm font-bold rounded-xl transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
+                          className={`block px-5 py-3 text-sm font-bold transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
                             pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
                           }`}
                         >
@@ -432,9 +375,98 @@ const Navbar = () => {
                         </TransitionLink>
                       ))}
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
+              ) : (
+                <TransitionLink
+                  href="/about"
+                  data-menu-item
+                  data-active={isActive("/about") || isActive("/management") ? "" : undefined}
+                  className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
+                    isActive("/about")
+                      ? "text-foreground"
+                      : "text-foreground/70 hover:text-foreground"
+                  }`}
+                >
+                  About
+                </TransitionLink>
+              )}
+
+              {/* Services */}
+              {devMode.navbar.showDropdowns ? (
+                <div
+                  className="relative"
+                  data-menu-item
+                  onMouseEnter={() => openDropdown("services")}
+                  onMouseLeave={closeDropdown}
+                  data-active={isActive("/services") ? "" : undefined}
+                >
+                  <button
+                    className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
+                      isActive("/services")
+                        ? "text-foreground"
+                        : "text-foreground/70 hover:text-foreground"
+                    }`}
+                  >
+                    Services
+                    <svg
+                      className={`w-3.5 h-3.5 transition-transform ${activeDropdown === "services" ? "rotate-180" : ""}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  {activeDropdown === "services" && (
+                    <div
+                      className="absolute top-full left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-xl border border-border/50 py-4 z-50 w-[680px]"
+                      onMouseEnter={() => openDropdown("services")}
+                      onMouseLeave={closeDropdown}
+                    >
+                      <div className="px-4 mb-3 pb-3 border-b border-border/40">
+                        <TransitionLink
+                          href="/services"
+                          className="text-xs font-black uppercase tracking-widest text-[#DC5817] hover:underline"
+                        >
+                          View All Services →
+                        </TransitionLink>
+                      </div>
+                      <div className="grid grid-cols-2 gap-1 px-2">
+                        {serviceLinks.map((link) => (
+                          <TransitionLink
+                            key={link.href}
+                            href={link.href}
+                            className={`block px-4 py-2.5 text-sm font-bold rounded-xl transition-colors hover:text-[#DC5817] hover:bg-[#F8F9FA] ${
+                              pathname === link.href ? "text-[#13642C]" : "text-foreground/70"
+                            }`}
+                          >
+                            {link.label}
+                          </TransitionLink>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <TransitionLink
+                  href="/services"
+                  data-menu-item
+                  data-active={isActive("/services") ? "" : undefined}
+                  className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
+                    isActive("/services")
+                      ? "text-foreground"
+                      : "text-foreground/70 hover:text-foreground"
+                  }`}
+                >
+                  Services
+                </TransitionLink>
+              )}
 
               {/* Projects */}
               <TransitionLink

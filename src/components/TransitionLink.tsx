@@ -11,6 +11,7 @@ interface TransitionLinkProps extends LinkProps {
   onMouseEnter?: () => void;
   onMouseLeave?: () => void;
   onMouseMove?: () => void;
+  style?: React.CSSProperties;
 }
 
 const TransitionLink = forwardRef<HTMLAnchorElement, TransitionLinkProps>(
