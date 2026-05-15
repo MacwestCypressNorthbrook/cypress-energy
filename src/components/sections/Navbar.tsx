@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { services } from "@/lib/services-data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import MaskButton from "../MaskButton";
 import CircleButton from "../ui/CircleButton";
 import { devMode } from "@/lib/dev-mode";
 
@@ -303,7 +302,7 @@ const Navbar = () => {
             {/* Pill-shaped Navigation Container */}
             <div
               ref={navPillRef}
-              className="scale-85 relative bg-white/0 backdrop-blur-sm rounded-2xl p-1 flex items-center gap-8"
+              className="scale-85 relative bg-white/10 backdrop-blur-sm rounded-2xl p-1 flex items-center gap-8"
             >
               {/* Animated white pill background */}
               <div
@@ -320,7 +319,7 @@ const Navbar = () => {
                 data-menu-item
                 data-active={pathname === "/" ? "" : undefined}
                 className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
-                  pathname === "/" ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+                  isHome ? "text-foreground" : "text-[#f8661d] hover:text-foreground"
                 }`}
               >
                 Home
@@ -337,9 +336,11 @@ const Navbar = () => {
                 >
                   <button
                     className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
-                      isActive("/about") || isActive("/management")
-                        ? "text-foreground"
-                        : "text-foreground/70 hover:text-foreground"
+                      isHome
+                        ? isActive("/about") || isActive("/management")
+                          ? "text-foreground"
+                          : "text-foreground/70 hover:text-foreground"
+                        : "text-[#f8661d] hover:text-foreground"
                     }`}
                   >
                     About
@@ -383,9 +384,11 @@ const Navbar = () => {
                   data-menu-item
                   data-active={isActive("/about") || isActive("/management") ? "" : undefined}
                   className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
-                    isActive("/about")
-                      ? "text-foreground"
-                      : "text-foreground/70 hover:text-foreground"
+                    isHome
+                      ? isActive("/about")
+                        ? "text-foreground"
+                        : "text-foreground/70 hover:text-foreground"
+                      : "text-[#f8661d] hover:text-foreground"
                   }`}
                 >
                   About
@@ -403,9 +406,11 @@ const Navbar = () => {
                 >
                   <button
                     className={`relative cursor-pointer z-10 text-lg font-bold transition-all tracking-tight flex items-center gap-1 px-6 py-2.5 rounded-2xl ${
-                      isActive("/services")
-                        ? "text-foreground"
-                        : "text-foreground/70 hover:text-foreground"
+                      isHome
+                        ? isActive("/services")
+                          ? "text-foreground"
+                          : "text-foreground/70 hover:text-foreground"
+                        : "text-[#f8661d] hover:text-foreground"
                     }`}
                   >
                     Services
@@ -459,9 +464,11 @@ const Navbar = () => {
                   data-menu-item
                   data-active={isActive("/services") ? "" : undefined}
                   className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
-                    isActive("/services")
-                      ? "text-foreground"
-                      : "text-foreground/70 hover:text-foreground"
+                    isHome
+                      ? isActive("/services")
+                        ? "text-foreground"
+                        : "text-foreground/70 hover:text-foreground"
+                      : "text-[#f8661d] hover:text-foreground"
                   }`}
                 >
                   Services
@@ -474,9 +481,11 @@ const Navbar = () => {
                 data-menu-item
                 data-active={isActive("/projects") ? "" : undefined}
                 className={`relative z-10 text-lg font-bold transition-all tracking-tight px-6 py-2.5 rounded-2xl ${
-                  isActive("/projects")
-                    ? "text-foreground"
-                    : "text-foreground/70 hover:text-foreground"
+                  isHome
+                    ? isActive("/projects")
+                      ? "text-foreground"
+                      : "text-foreground/70 hover:text-foreground"
+                    : "text-[#f8661d] hover:text-foreground"
                 }`}
               >
                 Projects

@@ -58,9 +58,7 @@ const ProjectsHero: React.FC<ProjectsHeroProps> = ({ title, subtitle, image }) =
               </span>
             </div>
 
-            <h1
-              className="hero-fade-up text-3xl md:text-5xl lg:text-6xl font-display font-light uppercase tracking-tight leading-[1.05] text-white"
-            >
+            <h1 className="hero-fade-up text-3xl md:text-5xl lg:text-6xl font-display font-light uppercase tracking-tight leading-[1.05] text-white">
               {title}
             </h1>
 
@@ -72,15 +70,11 @@ const ProjectsHero: React.FC<ProjectsHeroProps> = ({ title, subtitle, image }) =
       </div>
 
       {/* Overlapping Media Section */}
-      <div className="max-w-[1140px] mx-auto px-6 -mt-16 md:-mt-24 pb-16 relative z-20">
+      <div className="hidden max-w-[1140px] mx-auto px-6 -mt-16 md:-mt-24 pb-16 relative z-20">
         <div className="relative w-full aspect-video md:aspect-1136/584 rounded-[25px] overflow-hidden group bg-black">
           {/* Media Content */}
           <div className="parallax-media absolute inset-0 top-[-10%] h-[120%]">
-            <img 
-              src={image} 
-              className="w-full h-full object-cover" 
-              alt={title} 
-            />
+            <img src={image} className="w-full h-full object-cover" alt={title} />
           </div>
 
           <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000" />

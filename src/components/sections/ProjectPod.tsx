@@ -118,9 +118,7 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
 
   return (
     <div ref={containerRef} className="relative w-full mb-16 md:mb-24 last:mb-0 group">
-      <div
-        className="grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-8 md:gap-10 items-stretch"
-      >
+      <div className="grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-8 md:gap-10 items-stretch">
         {/* Text Card */}
         <div className="flex flex-col h-full">
           <div className="bg-[#0B2D26] text-white rounded-[25px] px-[30px] pt-[28px] pb-[36px] flex flex-col h-full relative overflow-hidden">
@@ -190,7 +188,7 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
                   className="absolute bottom-0 right-[99.8%] w-12 h-12"
                 />
 
-                <CircleButton href="/contact" variant="primary">
+                <CircleButton show={false} href="/contact" variant="primary">
                   Inquire
                 </CircleButton>
               </div>
