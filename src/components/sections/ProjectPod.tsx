@@ -84,15 +84,9 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
                 {title}
               </h2>
               <div className="space-y-4 mb-10">
-                <p className="text-black/60 text-sm md:text-base leading-relaxed">
-                  {description}
-                </p>
+                <p className="text-black/60 text-sm md:text-base leading-relaxed">{description}</p>
               </div>
-              <CircleButton
-                href="/contact"
-                variant="secondary"
-                className="scale-90 origin-left"
-              >
+              <CircleButton href="/contact" variant="secondary" className="scale-90 origin-left">
                 Inquire
               </CircleButton>
             </div>
@@ -118,19 +112,17 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
   }
 
   // Card Variant
-  const buttonAreaClasses = isEven ? "justify-end" : "justify-start";
-
-  const buttonContainerClasses = isEven
-    ? "rounded-tl-[25px] pl-8 pt-8"
-    : "rounded-tr-[25px] pr-8 pt-8";
+  // Fixed layout: Text left, Image right
+  const buttonAreaClasses = "justify-end";
+  const buttonContainerClasses = "rounded-tl-[25px] pl-8 pt-8";
 
   return (
     <div ref={containerRef} className="relative w-full mb-16 md:mb-24 last:mb-0 group">
       <div
-        className={`grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-8 md:gap-10 items-stretch ${!isEven ? "md:grid-cols-[minmax(0,725fr)_minmax(0,417fr)]" : ""}`}
+        className="grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-8 md:gap-10 items-stretch"
       >
         {/* Text Card */}
-        <div className={`flex flex-col h-full ${!isEven ? "md:order-2" : ""}`}>
+        <div className="flex flex-col h-full">
           <div className="bg-[#0B2D26] text-white rounded-[25px] px-[30px] pt-[28px] pb-[36px] flex flex-col h-full relative overflow-hidden">
             {/* Dashed Title Border */}
             <div className="border-b-2 border-[#DC5817] border-dashed pb-6 mb-8">
@@ -165,7 +157,7 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
                     </ul>
                   </div>
                 )}
-                
+
                 {deliveries && deliveries.length > 0 && (
                   <div>
                     <p className="text-[10px] font-display font-bold uppercase tracking-[0.4em] opacity-30 mb-3">
@@ -187,33 +179,16 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
             {/* Action Area */}
             <div className={`mt-auto mx-[-30px] mb-[-36px] flex ${buttonAreaClasses}`}>
               <div className={`relative bg-[#EDF6F0] ${buttonContainerClasses}`}>
-                {isEven ? (
-                  <>
-                    <InvertedCorner
-                      position="top-right"
-                      color="#EDF6F0"
-                      className="absolute bottom-[99.8%] right-0 w-12 h-12"
-                    />
-                    <InvertedCorner
-                      position="top-right"
-                      color="#EDF6F0"
-                      className="absolute bottom-0 right-[99.8%] w-12 h-12"
-                    />
-                  </>
-                ) : (
-                  <>
-                    <InvertedCorner
-                      position="top-left"
-                      color="#EDF6F0"
-                      className="absolute bottom-[99.8%] left-0 w-12 h-12"
-                    />
-                    <InvertedCorner
-                      position="top-left"
-                      color="#EDF6F0"
-                      className="absolute bottom-0 left-[99.8%] w-12 h-12"
-                    />
-                  </>
-                )}
+                <InvertedCorner
+                  position="top-right"
+                  color="#EDF6F0"
+                  className="absolute bottom-[99.8%] right-0 w-12 h-12"
+                />
+                <InvertedCorner
+                  position="top-right"
+                  color="#EDF6F0"
+                  className="absolute bottom-0 right-[99.8%] w-12 h-12"
+                />
 
                 <CircleButton href="/contact" variant="primary">
                   Inquire
@@ -224,9 +199,7 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
         </div>
 
         {/* Media Block */}
-        <div
-          className={`relative min-h-[400px] rounded-[25px] overflow-hidden ${!isEven ? "md:order-1" : ""}`}
-        >
+        <div className="relative min-h-[400px] rounded-[25px] overflow-hidden">
           <div className="absolute inset-0">
             <img
               ref={imageRef}

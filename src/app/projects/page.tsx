@@ -34,7 +34,7 @@ export default function ProjectsPage() {
                 image={project.image}
                 services={project.services}
                 deliveries={project.deliveries}
-                variant={index % 2 === 0 ? "card" : "minimal"}
+                variant="card"
               />
             ))}
           </div>
@@ -52,7 +52,9 @@ export default function ProjectsPage() {
               { value: "100%", label: "HSE Compliance" },
             ].map((stat) => (
               <div key={stat.label} className="space-y-4">
-                <div className="text-5xl md:text-6xl font-display font-light text-[#DAFDA3]">{stat.value}</div>
+                <div className="text-5xl md:text-6xl font-display font-light text-[#DAFDA3]">
+                  {stat.value}
+                </div>
                 <p className="text-[10px] font-display font-bold uppercase tracking-[0.4em] text-white/40">
                   {stat.label}
                 </p>

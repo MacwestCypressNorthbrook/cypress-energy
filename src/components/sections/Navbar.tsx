@@ -299,7 +299,7 @@ const Navbar = () => {
           </TransitionLink>
 
           {/* Desktop Nav */}
-          <div className="hidden absolute left-[49%] top-0 transform -translate-x-1/2 translate-y-1/5 lg:flex items-center gap-0">
+          <div className="hidden absolute left-[49%] top-0 transform -translate-x-1/2 translate-y-1/20 lg:flex items-center gap-0">
             {/* Pill-shaped Navigation Container */}
             <div
               ref={navPillRef}
@@ -490,7 +490,11 @@ const Navbar = () => {
               <MaskButton text="Contact Us" backgroundColor="#fd7435" />
             </TransitionLink> */}
 
-            <CircleButton href="/contact" variant="secondary" className="hidden md:inline-flex scale-90">
+            <CircleButton
+              href="/contact"
+              variant="secondary"
+              className="hidden md:inline-flex scale-90"
+            >
               Contact Us
             </CircleButton>
 
