@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import CircleButton from "../ui/CircleButton";
 import TransitionLink from "@/components/TransitionLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -94,20 +95,9 @@ const QHSEPolicy = () => {
               improve to serve our clients with the highest standards.
             </p>
 
-            <TransitionLink
-              href="/qhse"
-              className="inline-flex items-center gap-3 bg-[#082E29] hover:bg-[#0f4f22] text-white font-bold px-8 py-3.5 rounded-md text-sm transition-all hover:scale-105 shadow-lg shadow-[#13642C]/20"
-            >
+            <CircleButton href="/qhse" variant="primary">
               Our Latest Report
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 8l4 4m0 0l-4 4m4-4H3"
-                />
-              </svg>
-            </TransitionLink>
+            </CircleButton>
           </div>
 
           {/* RIGHT IMAGE */}

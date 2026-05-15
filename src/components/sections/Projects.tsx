@@ -5,11 +5,9 @@ import TransitionLink from "@/components/TransitionLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import CircleButton from "../ui/CircleButton";
 
 gsap.registerPlugin(ScrollTrigger);
-
-import MaskButton from "../MaskButton";
-import FluidButton from "../FluidButton";
 
 const featuredProjects = [
   {
@@ -107,9 +105,9 @@ const Projects = () => {
           </div>
           
           <div className="shrink-0">
-            <FluidButton href="/projects" className="h-14 min-w-48">
+            <CircleButton href="/projects" variant="secondary">
               Full Archive
-            </FluidButton>
+            </CircleButton>
           </div>
         </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import CircleButton from "../ui/CircleButton";
 import TransitionLink from "../TransitionLink";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -142,20 +143,9 @@ const Services = () => {
               Our <span className="text-foreground/15">Services</span>
             </h2>
           </div>
-          <TransitionLink
-            href="/services"
-            className="hidden md:inline-flex items-center gap-2 text-[#13642C] font-bold hover:gap-4 transition-all text-sm uppercase tracking-widest group"
-          >
+          <CircleButton href="/services" variant="secondary" className="hidden md:inline-flex">
             View All Services
-            <svg
-              className="w-4 h-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </TransitionLink>
+          </CircleButton>
         </div>
 
         {/* Bento Grid */}
@@ -206,20 +196,9 @@ const Services = () => {
         
         {/* Mobile View All Link */}
         <div className="mt-10 flex justify-center md:hidden">
-          <TransitionLink
-            href="/services"
-            className="inline-flex items-center gap-2 text-[#13642C] font-bold hover:gap-4 transition-all text-sm uppercase tracking-widest group"
-          >
+          <CircleButton href="/services" variant="secondary">
             View All Services
-            <svg
-              className="w-4 h-4 transition-transform group-hover:translate-x-1"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </TransitionLink>
+          </CircleButton>
         </div>
 
       </div>

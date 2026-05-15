@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import FluidButton from "../FluidButton";
+import CircleButton from "../ui/CircleButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -74,9 +74,9 @@ const Advantage = () => {
           </div>
 
           <div className="adv-heading-item">
-            <FluidButton href="/about" className="h-14 min-w-48">
+            <CircleButton href="/about" variant="secondary">
               Corporate Overview
-            </FluidButton>
+            </CircleButton>
           </div>
         </div>
 

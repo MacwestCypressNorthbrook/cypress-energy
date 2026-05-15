@@ -135,7 +135,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
               <span className="text-[10px] font-display font-bold uppercase tracking-[0.4em] opacity-30 mb-2 block">
                 Capability 0{index + 1}
               </span>
-              <h3 className="text-xl md:text-2xl font-display font-light uppercase tracking-tight leading-[1.1]">
+              <h3 className="text-xl md:text-3xl font-display font-light uppercase tracking-tight leading-[1.1]">
                 {title}
               </h3>
             </div>

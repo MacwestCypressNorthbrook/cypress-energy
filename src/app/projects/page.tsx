@@ -1,147 +1,59 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import PageHero from "@/components/layout/PageHero";
+import ProjectsHero from "@/components/sections/ProjectsHero";
+import ProjectPod from "@/components/sections/ProjectPod";
+import ServicesFooterCTA from "@/components/sections/ServicesFooterCTA";
 import { projects } from "@/lib/projects-data";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectsPage() {
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(
-    () => {
-      gsap.fromTo(
-        ".project-item",
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: gridRef.current, start: "top 82%", once: true },
-        },
-      );
-    },
-    { scope: gridRef },
-  );
-
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[#EDF6F0] selection:bg-[#DC5817]/30 overflow-x-hidden">
       <Navbar />
 
-      <PageHero
-        title="Projects"
-        subtitle="A selection of recent campaigns where Cypress Energy delivered integrated offshore support, logistics, and survey services for tier-1 operators across West Africa."
+      {/* Hero Section */}
+      <ProjectsHero
+        title="Engineering Success Across West Africa"
+        subtitle="Explore our portfolio of complex offshore campaigns, technical surveys, and logistics support for the world's leading energy operators."
         image="/images/abd9674e79b5d94da4786412caac4e48-xlarge.jpg"
-        breadcrumb={[
-          { label: "Home", href: "/" },
-          { label: "Projects", href: "/projects" },
-        ]}
       />
 
-      {/* Projects grid */}
-      <section className="py-24 bg-white">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <div
+      {/* Project Pods */}
+      <section className="py-20 relative z-10">
+        <div className="max-w-[1140px] mx-auto px-6">
+          <div className="flex flex-col">
+            {projects.map((project, index) => (
+              <ProjectPod
                 key={project.id}
-                className="project-item group bg-[#F8F9FA] rounded-[2.5rem] overflow-hidden hover:shadow-xl transition-all duration-500"
-              >
-                {/* Image */}
-                <div className="aspect-video overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="p-8 space-y-5">
-                  <div className="flex items-start justify-between gap-2">
-                    <div>
-                      <p className="text-2xl underline font-extrabold uppercase tracking-widest text-[#DC5817] mb-1">
-                        {project.client}
-                      </p>
-                      <h3 className="text-xl font-black uppercase tracking-tight leading-tight group-hover:text-[#DC5817] transition-colors">
-                        {project.title}
-                      </h3>
-                    </div>
-                    {project.date && (
-                      <span className="text-xs font-bold text-muted-foreground bg-white px-3 py-1 rounded-full shrink-0">
-                        {project.date}
-                      </span>
-                    )}
-                  </div>
-
-                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                    {project.description}
-                  </p>
-
-                  {/* Services tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {project.services.slice(0, 3).map((svc) => (
-                      <span
-                        key={svc}
-                        className="text-xs font-bold bg-white border border-border px-3 py-1.5 rounded-full text-foreground/60"
-                      >
-                        {svc}
-                      </span>
-                    ))}
-                    {project.services.length > 3 && (
-                      <span className="text-xs font-bold bg-white border border-border px-3 py-1.5 rounded-full text-foreground/40">
-                        +{project.services.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Deliveries */}
-                  {project.deliveries && (
-                    <div className="pt-2 border-t border-border space-y-2">
-                      <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
-                        Technical Deliveries
-                      </p>
-                      <ul className="space-y-1">
-                        {project.deliveries.map((d) => (
-                          <li
-                            key={d}
-                            className="flex items-start gap-2 text-xs font-medium text-foreground/60"
-                          >
-                            <span className="w-1 h-1 rounded-full bg-[#DC5817] shrink-0 mt-1.5" />
-                            {d}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
+                index={index}
+                title={project.title}
+                client={project.client}
+                description={project.description}
+                image={project.image}
+                services={project.services}
+                deliveries={project.deliveries}
+                variant={index % 2 === 0 ? "card" : "minimal"}
+              />
             ))}
           </div>
         </div>
       </section>
 
       {/* Stats banner */}
-      <section className="py-24 bg-black">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <section className="py-24 bg-[#0B2D26] rounded-t-[2.5rem] md:rounded-t-[4rem]">
+        <div className="max-w-[1140px] mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
             {[
               { value: "9+", label: "Major Campaigns" },
               { value: "Tier-1", label: "Clients Served" },
               { value: "5+", label: "Countries Involved" },
               { value: "100%", label: "HSE Compliance" },
             ].map((stat) => (
-              <div key={stat.label} className="space-y-2">
-                <div className="text-5xl md:text-6xl font-black text-[#DC5817]">{stat.value}</div>
-                <p className="text-xs font-bold uppercase tracking-widest text-white/40">
+              <div key={stat.label} className="space-y-4">
+                <div className="text-5xl md:text-6xl font-display font-light text-[#DAFDA3]">{stat.value}</div>
+                <p className="text-[10px] font-display font-bold uppercase tracking-[0.4em] text-white/40">
                   {stat.label}
                 </p>
               </div>
@@ -149,6 +61,10 @@ export default function ProjectsPage() {
           </div>
         </div>
       </section>
+
+      <div className="mt-20">
+        <ServicesFooterCTA />
+      </div>
 
       <Footer />
     </main>

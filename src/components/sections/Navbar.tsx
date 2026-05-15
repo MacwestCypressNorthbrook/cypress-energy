@@ -7,7 +7,7 @@ import { services } from "@/lib/services-data";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import MaskButton from "../MaskButton";
-import FluidButton from "../FluidButton";
+import CircleButton from "../ui/CircleButton";
 import { devMode } from "@/lib/dev-mode";
 
 gsap.registerPlugin(useGSAP);
@@ -490,9 +490,9 @@ const Navbar = () => {
               <MaskButton text="Contact Us" backgroundColor="#fd7435" />
             </TransitionLink> */}
 
-            <FluidButton href="/contact" className="hidden md:inline-flex">
+            <CircleButton href="/contact" variant="secondary" className="hidden md:inline-flex scale-90">
               Contact Us
-            </FluidButton>
+            </CircleButton>
 
             {/* Hamburger — 3 animated bars */}
             <button

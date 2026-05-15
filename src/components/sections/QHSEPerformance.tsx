@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import CircleButton from "../ui/CircleButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -103,9 +104,9 @@ const QHSEPerformance = () => {
             </h2>
           </div>
 
-          <button className="inline-flex items-center gap-3 bg-[#DC5817] hover:bg-[#C44D14] text-white font-bold px-8 py-3.5 rounded-xl text-sm transition-all hover:scale-105 shadow-lg shadow-[#DC5817]/20">
+          <CircleButton href="/qhse" variant="secondary">
             View Details
-          </button>
+          </CircleButton>
         </div>
 
         {/* Grid */}

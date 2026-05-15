@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import TransitionLink from "@/components/TransitionLink";
+import CircleButton from "@/components/ui/CircleButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -159,25 +159,9 @@ const AboutUs = () => {
               </div>
 
               <div className="about-text-line">
-                <TransitionLink
-                  href="/about"
-                  className="inline-flex items-center gap-2 text-[#13642C] font-bold hover:gap-4 transition-all text-sm uppercase tracking-widest group"
-                >
+                <CircleButton href="/about" variant="secondary">
                   Read More
-                  <svg
-                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </TransitionLink>
+                </CircleButton>
               </div>
             </div>
 

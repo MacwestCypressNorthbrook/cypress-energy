@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "@/context/LoadingContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import FluidButton from "../FluidButton";
+import CircleButton from "../ui/CircleButton";
 
 const slides = [
   {
@@ -212,9 +212,9 @@ const Hero = () => {
               {/* <PremiumButton href={slide.ctaHref} label={slide.ctaLabel} /> */}
               {/* <MaskButton text="Contact Us" backgroundColor="#fd7435" /> */}
 
-              <FluidButton href={slide.ctaHref} className="hidden md:inline-flex">
+              <CircleButton href={slide.ctaHref} variant="secondary" className="hidden md:inline-flex">
                 {slide.ctaLabel}
-              </FluidButton>
+              </CircleButton>
             </div>
           </div>
         </div>

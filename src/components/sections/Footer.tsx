@@ -15,7 +15,6 @@ const Footer = () => {
   return (
     <footer className="bg-transparent pt-16 md:pt-24 pb-12 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
-
         {/* Refined 'Cuter' Engineering Blueprint CTA Card */}
         <div className="relative group rounded-[2.5rem] overflow-hidden mb-24 border border-[#13642C]/10 bg-linear-to-br from-[#FDFDFD] to-[#F5F7F5] shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-700 max-w-5xl mx-auto">
           {/* Blueprint Grid Background - Layered */}
@@ -32,7 +31,12 @@ const Footer = () => {
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >
-              <pattern id="footer-grid-refined" width="10" height="10" patternUnits="userSpaceOnUse">
+              <pattern
+                id="footer-grid-refined"
+                width="10"
+                height="10"
+                patternUnits="userSpaceOnUse"
+              >
                 <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#13642C" strokeWidth="0.1" />
               </pattern>
               <rect width="100" height="100" fill="url(#footer-grid-refined)" />
@@ -47,7 +51,7 @@ const Footer = () => {
           <div className="hidden md:block absolute bottom-6 right-8 text-[9px] font-mono text-[#13642C]/20 uppercase tracking-[0.4em]">
             SCALE: 1:50 / PRECISION: ELITE
           </div>
-          
+
           {/* Delicate Corner Brackets */}
           <div className="absolute top-6 right-6 w-4 h-4 md:top-8 md:right-8 md:w-6 md:h-6 border-t border-r border-[#13642C]/15 rounded-tr-lg" />
           <div className="absolute bottom-6 left-6 w-4 h-4 md:bottom-8 md:left-8 md:w-6 md:h-6 border-b border-l border-[#13642C]/15 rounded-bl-lg" />
@@ -192,7 +196,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-12 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">
+        <div className="pt-0 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">
           <p>Cypress Energy Company Limited</p>
           <p>© 2025 All Rights Reserved · Cypress Energy</p>
         </div>
