@@ -121,7 +121,7 @@ const CEOMessage = () => {
             <div className="lg:col-span-5 order-2 lg:order-1">
               <div className="ceo-image-wrapper relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/Screenshot-2023-02-28-at-13.53.31.png"
+                  src="/images/team/ceo.webp"
                   alt="Kwabena Amponsah Osei-Bonsu"
                   className="w-full h-auto transition-all duration-1000"
                 />
@@ -177,7 +177,7 @@ const CEOMessage = () => {
                 </blockquote>
               </div>
 
-              <div className="ceo-sig pt-6 border-t border-[#13642C]/10 inline-block">
+              <div className="ceo-sig pt-0 border-t border-[#13642C]/10 inline-block">
                 <h4 className="text-2xl font-black text-[#13642C] uppercase tracking-tight mb-1">
                   Kwabena Amponsah Osei-Bonsu
                 </h4>

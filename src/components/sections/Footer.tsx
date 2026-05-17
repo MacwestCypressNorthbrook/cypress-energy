@@ -23,7 +23,7 @@ const Footer = () => {
     <footer className="bg-transparent pt-16 md:pt-24 pb-12 overflow-hidden">
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Refined 'Cuter' Engineering Blueprint CTA Card */}
-        <div className="relative group rounded-[2.5rem] overflow-hidden mb-24 border border-[#13642C]/10 bg-linear-to-br from-[#FDFDFD] to-[#F5F7F5] shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-700 max-w-5xl mx-auto">
+        <div className="relative group rounded-[2.5rem] overflow-hidden mb-10 border border-[#13642C]/10 bg-linear-to-br from-[#FDFDFD] to-[#F5F7F5] shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-700 max-w-5xl mx-auto">
           {/* Blueprint Grid Background - Layered */}
           <div className="absolute inset-0 pointer-events-none">
             <div
@@ -109,7 +109,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="space-y-6">
             <TransitionLink href="/">
               <img src="/LOGO-FOOTER-3.png" alt="Cypress Energy" className="h-16 w-auto" />
@@ -148,11 +148,11 @@ const Footer = () => {
                   Team
                 </TransitionLink>
               </li>
-              <li>
+              {/* <li>
                 <TransitionLink href="/management" className="hover:text-black transition-colors">
                   Management
                 </TransitionLink>
-              </li>
+              </li> */}
               <li>
                 <TransitionLink href="/projects" className="hover:text-black transition-colors">
                   Projects

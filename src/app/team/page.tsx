@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import PageHero from "@/components/layout/PageHero";
@@ -18,26 +18,26 @@ const teamMembers = [
     id: 1,
     name: "Kwabena Amponsah Osei-Bonsu",
     role: "Chief Executive Officer",
-    image: "/images/Screenshot-2023-02-28-at-13.53.31.png",
+    image: "/images/team/ceo.webp",
     description:
-      "30+ years in land economy, valuation, and corporate governance. BSc (Hons) Land Economy, KNUST. Career spanning the Land Valuation Board (Accra) and Chinbuah, Owusu-Adjapong & Partners. Fellow, Ghana Institution of Surveyors (Board of Examiners; Valuation & Estate Divisional Committee).",
+      "Kwabena Amponsah Osei-Bonsu is an accomplished business leader with more than thirty years of experience in land economy, valuation, and corporate governance. He holds a Bachelor of Science (Honors) degree in Land Economy from the Kwame Nkrumah University of Science and Technology.\n\nHis career began at the Land Valuation Board in Accra, where he contributed to national-scale property valuation projects. He later joined Chinbuah, Owusu-Adjapong & Partners Limited, where he distinguished himself in complex valuation and estate management assignments.\n\nMr. Osei-Bonsu is a Fellow of the Ghana Institution of Surveyors (GhIS), where he has played active leadership roles as a member of the Board of Examiners and the Divisional Committee for the Valuation and Estate section. His governance experience spans both local and international organizations. He serves on the boards of KOA Consult, Macwest Limited, Waterbridge Ltd., and Bumi Armada Sharpooji & Pallonji Limited, as well as Bumi Armada Ghana Limited, affiliations that have given him significant exposure to multinational operations and global business practices.\n\nAs Chief Executive Officer of Cypress Energy, Mr. Osei-Bonsu brings together technical expertise, institutional knowledge, and strategic leadership. He is committed to strengthening the company’s role as a trusted partner in Ghana’s energy sector, driving growth while positioning the firm within a wider regional context.",
   },
 
   {
     id: 3,
-    name: "Richard Allan Whalley",
-    role: "Finance Director",
-    image: "/images/1H6A3259-scaled-newwwwww.jpg",
+    name: "Kwabena Osei-Bonsu",
+    role: "Executive Director",
+    image: "/images/team/Kwabena.webp",
     description:
-      "BSc Biochemistry & Food Technology (Leeds); CIMA qualified; executive programmes at PwC, INSEAD, and Cranfield. Career as Graduate Trainee Accountant at Sandoz Holdings; Group Finance Director at Wier Holdings (2001 – UK/France/Spain/Belgium/Denmark); Finance Director at International Land Development Co. / John Murphy Construction (2005). Over 30 years of international finance experience.",
+      "Kwabena Gyima Osei-Bonsu holds a Bachelor of Arts (Honours) degree in Law and Sociology from the Kwame Nkrumah University of Science and Technology. He began his professional career as a Legal Officer with the Ghana National Petroleum Corporation (GNPC), where he gained early exposure to the petroleum industry’s regulatory and operational framework.\n\nHe later joined Meridian Biao Bank in Accra as a Corporate Affairs Officer, contributing to the bank’s communications and stakeholder engagement efforts. Mr. Osei-Bonsu transitioned to the United Kingdom, where he was appointed Business Development Manager at Talk is Cheap Telecommunications in London, expanding his international business experience.\n\nIn 2003, he took the role of Executive Director at MX Corp, a company recognized for its work in the engineering sector. His leadership helped strengthen the firm’s profile within the industry. He currently serves on the Board of the State Insurance Company (SIC), Ghana’s largest general insurer, where he contributes to governance and strategic oversight.\n\nMr. Osei-Bonsu is the Executive Director of Cypress Energy Limited, where he brings more than two decades of multi-sector experience spanning energy, finance, telecommunications, and engineering. His career reflects a strong foundation in both corporate governance and business development.",
   },
   {
     id: 4,
-    name: "Nana Yaw Osei-Bonsu",
-    role: "Technical Operations Manager",
-    image: "/images/1H6A2307-scaled.jpeg",
+    name: "Allen Whalley",
+    role: "Finance Director",
+    image: "/images/team/Whalley.webp",
     description:
-      "Specializes in offshore logistics and technical maintenance. Extensive experience in subsea engineering and campaign coordination across the West African coast.",
+      "Richard Allan Whalley earned a BSc in Biochemistry and Food Technology from the University of Leeds and later pursued professional qualifications in Accounting and Finance with CIMA. He also completed executive development programs with PricewaterhouseCoopers, INSEAD, and the Cranfield School of Management.\n\nHe began his career as a Graduate Trainee Accountant with Sandoz Holdings (now part of Clariant and Novartis), where he gained experience in the global pharmaceutical sector. In 2001, he was appointed Group Finance Director at Wier Holdings Limited, with responsibility for Finance, Human Resources, and IT across operations in the UK, France, Spain, Belgium, and Denmark.\n\nRichard went on to serve as Finance Director with the International Land Development Company/John Murphy Construction in 2005, where he managed financial operations and cashflow during a period of significant growth in civil construction and infrastructure projects. His work in these sectors sharpened his expertise in managing complex, multi-country operations and aligning financial strategy with business expansion.\n\nToday, Richard serves as Director of Finance for Cypress Energy Ghana Limited, where he applies more than three decades of international finance experience to support the company’s mission of driving energy and infrastructure growth across Africa.",
   },
   {
     id: 5,
@@ -235,6 +235,18 @@ const TeamPage = () => {
     { scope: containerRef, dependencies: [isLoaded] },
   );
 
+  // Prevent background scrolling when modal/drawer is open
+  useEffect(() => {
+    if (selectedMember || isVideoOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [selectedMember, isVideoOpen]);
+
   // Drawer animation logic
   useGSAP(
     () => {
@@ -274,7 +286,7 @@ const TeamPage = () => {
     >
       <Navbar />
 
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative pt-20 pb-32 overflow-hidden">
         {/* Delicate Connecting Lines matching the reference */}
         <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
           <svg
@@ -434,8 +446,8 @@ const TeamPage = () => {
       >
         <div className="p-12 md:p-16 h-full flex flex-col drawer-content">
           {selectedMember && (
-            <div className="space-y-8 grow flex flex-col items-center text-center">
-              <div className="w-40 h-40 rounded-full overflow-hidden shadow-xl ring-4 ring-[#DC5817]/10 ring-offset-4 mx-auto">
+            <div className="flex flex-col items-center text-center min-h-0 grow pb-6">
+              <div className="w-40 h-40 shrink-0 rounded-full overflow-hidden shadow-xl ring-4 ring-[#DC5817]/10 ring-offset-4 mx-auto mb-8">
                 <img
                   src={selectedMember.image}
                   alt={selectedMember.name}
@@ -443,31 +455,39 @@ const TeamPage = () => {
                 />
               </div>
 
-              <div className="space-y-4 w-full">
-                <div className="space-y-1">
+              <div className="w-full flex flex-col min-h-0 grow">
+                <div className="shrink-0">
                   {/* <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#DC5817]">
                     Team Member Profile
                   </p> */}
                   <h2 className="text-2xl font-black text-[#13642C] uppercase tracking-tight leading-tight">
                     {selectedMember.name}
                   </h2>
-                  <p className="text-[#DC5817] font-bold uppercase tracking-widest text-xs py-1.5 px-3 bg-[#DC5817]/10 inline-block rounded-md mt-4 mx-auto">
+                  <p className="text-[#DC5817] font-bold uppercase tracking-widest text-xs py-1.5 px-3 bg-[#DC5817]/10 inline-block rounded-md mt-4 mx-auto mb-6">
                     {selectedMember.role}
                   </p>
                 </div>
 
-                <div className="w-12 h-1 bg-[#13642C] my-6 mx-auto" />
+                <div className="w-12 h-1 bg-[#13642C] mx-auto shrink-0 mb-6" />
 
-                <div className="prose prose-slate max-w-none">
-                  <p className="text-muted-foreground text-base leading-relaxed font-medium">
-                    {selectedMember.description}
-                  </p>
+                <div 
+                  className="prose prose-slate max-w-none overflow-y-auto overscroll-contain min-h-0 grow pr-2 custom-scrollbar"
+                  data-lenis-prevent="true"
+                >
+                  {selectedMember.description.split('\n').map((paragraph: string, idx: number) => {
+                    if (!paragraph.trim()) return null;
+                    return (
+                      <p key={idx} className="text-muted-foreground text-left text-base leading-relaxed font-medium mb-4 last:mb-0">
+                        {paragraph.trim()}
+                      </p>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           )}
 
-          <div className="pt-12 mt-auto">
+          <div className="pt-6 mt-auto shrink-0">
             <button
               onClick={() => setSelectedMember(null)}
               className="w-full bg-[#13642C] text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-[#DC5817] transition-all hover:scale-[1.02] active:scale-95 text-sm"
