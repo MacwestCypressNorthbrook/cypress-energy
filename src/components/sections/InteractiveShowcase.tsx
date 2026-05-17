@@ -66,7 +66,7 @@ const InteractiveShowcase = () => {
               trigger: wrapper,
               start: "top 95%",
               end: "bottom 90%",
-              scrub: 1.2,
+              scrub: true,
             },
           }
         );
@@ -103,7 +103,7 @@ const InteractiveShowcase = () => {
               className={`showcase-item-wrapper ${image.class} overflow-hidden rounded-[2rem] md:rounded-[2.5rem]`}
               style={{ backgroundColor: 'transparent' }}
             >
-              <div className="showcase-item relative w-full h-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden group shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-[#DC5817]/10">
+              <div className="showcase-item will-change-transform relative w-full h-full rounded-[2rem] md:rounded-[2.5rem] overflow-hidden group shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-[#DC5817]/10">
                 <img
                   src={image.src}
                   alt={`Showcase image ${index + 1}`}

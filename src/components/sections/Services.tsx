@@ -119,7 +119,7 @@ const Services = () => {
               trigger: wrapper,
               start: "top 95%", // Start as it enters the bottom
               end: "bottom 90%", // Fully settle as soon as the bottom of the card is visible
-              scrub: 1.2, // Slightly faster catch-up
+              scrub: true, // Use true instead of 1.2 to prevent double-smoothing lag with Lenis
             },
           }
         );
@@ -158,7 +158,7 @@ const Services = () => {
             >
               <TransitionLink
                 href={service.href}
-                className="bento-item relative w-full h-full block rounded-[2rem] overflow-hidden group shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-[#13642C]/20"
+                className="bento-item will-change-transform relative w-full h-full block rounded-[2rem] overflow-hidden group shadow-lg transition-shadow duration-300 hover:shadow-2xl hover:shadow-[#13642C]/20"
               >
                 {/* Background Image */}
                 <div

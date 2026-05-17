@@ -3,12 +3,19 @@
 import TransitionLink from "@/components/TransitionLink";
 
 const serviceLinks = [
-  { label: "Offshore Vessel Supply", href: "/services/offshore-vessel-supply" },
-  { label: "Manpower Management", href: "/services/manpower" },
-  { label: "Power Generation", href: "/services/power-generation" },
-  { label: "Jack-up Drilling Rigs", href: "/services/jack-up-drilling-rigs" },
-  { label: "Geo Seismic Surveys", href: "/services/geo-seismic-surveys" },
-  { label: "Logistics & Freight", href: "/services/logistics-freight-forwarding" },
+  // { label: "Offshore Vessel Supply", href: "/services/offshore-vessel-supply" },
+  { label: "Offshore Vessel Supply", href: "/services#offshore-vessel-supply" },
+  // { label: "Manpower Management", href: "/services/manpower" },
+  { label: "Manpower Management", href: "/services#manpower" },
+  // { label: "Power Generation", href: "/services/power-generation" },
+  { label: "Power Generation", href: "/services#power-generation" },
+  // { label: "Jack-up Drilling Rigs", href: "/services/jack-up-drilling-rigs" },
+  { label: "Jack-up Drilling Rigs", href: "/services#jack-up-drilling-rigs" },
+  // { label: "Geo Seismic Surveys", href: "/services/geo-seismic-surveys" },
+  { label: "Geo Seismic Surveys", href: "/services#geo-seismic-surveys" },
+  // { label: "Logistics & Freight", href: "/services/logistics-freight-forwarding" },
+  { label: "Logistics & Freight", href: "/services#logistics-freight-forwarding" },
+  { label: "All Services", href: "/services" },
 ];
 
 const Footer = () => {

@@ -68,7 +68,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
 
   if (variant === "minimal") {
     return (
-      <div ref={containerRef} className="relative w-full mb-20 md:mb-32 last:mb-0 group">
+      <div ref={containerRef} id={slug} className="relative w-full mb-20 md:mb-32 last:mb-0 group">
         <div
           className={`grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-16 md:gap-24 items-center ${!isEven ? "md:grid-cols-[minmax(0,725fr)_minmax(0,417fr)]" : ""}`}
         >
@@ -123,7 +123,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
     : "rounded-tr-[25px] pr-8 pt-8";
 
   return (
-    <div ref={containerRef} className="relative w-full mb-16 md:mb-24 last:mb-0 group">
+    <div ref={containerRef} id={slug} className="relative w-full mb-16 md:mb-24 last:mb-0 group">
       <div
         className={`grid grid-cols-1 md:grid-cols-[minmax(0,417fr)_minmax(0,725fr)] gap-8 md:gap-10 items-stretch ${!isEven ? "md:grid-cols-[minmax(0,725fr)_minmax(0,417fr)]" : ""}`}
       >

@@ -55,6 +55,12 @@
       "skillPath": "skills/gsap-utils/SKILL.md",
       "computedHash": "1ab2387f6e694718a4f1b5acf2a4ab16e1b884c3428adf5f6b26d830f00826cf"
     },
+    "implement_lenis_scroll": {
+      "source": "jerrar670/surf-website",
+      "sourceType": "github",
+      "skillPath": ".agent/skills/implement_lenis_scroll/SKILL.md",
+      "computedHash": "595d911a46b2953b97ad2d77bf3bd59b335a5a728355a8ef1091f3615c08c0db"
+    },
     "vercel-react-view-transitions": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",

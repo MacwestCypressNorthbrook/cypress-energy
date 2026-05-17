@@ -20,16 +20,9 @@ const teamMembers = [
     role: "Chief Executive Officer",
     image: "/images/Screenshot-2023-02-28-at-13.53.31.png",
     description:
-      "30+ years in land economy, valuation, and corporate governance. BSc (Hons) Land Economy, KNUST. Career spanning the Land Valuation Board (Accra) and Chinbuah, Owusu-Adjapong & Partners. Fellow, Ghana Institution of Surveyors (Board of Examiners; Valuation & Estate Divisional Committee). Board roles include KOA Consult, Macwest Limited, Waterbridge Ltd., Bumi Armada Sharpooji & Pallonji Limited, and Bumi Armada Ghana Limited.",
+      "30+ years in land economy, valuation, and corporate governance. BSc (Hons) Land Economy, KNUST. Career spanning the Land Valuation Board (Accra) and Chinbuah, Owusu-Adjapong & Partners. Fellow, Ghana Institution of Surveyors (Board of Examiners; Valuation & Estate Divisional Committee).",
   },
-  {
-    id: 2,
-    name: "Kwabena Gyima Osei-Bonsu",
-    role: "Executive Director",
-    image: "/images/WhatsApp-Image-2026-03-10-at-9.24.59-PM-1-2.jpeg",
-    description:
-      "BA (Hons) Law and Sociology, KNUST. Career as Legal Officer at the Ghana National Petroleum Corporation (GNPC); Corporate Affairs Officer at Meridian Biao Bank; Business Development Manager at Talk is Cheap Telecommunications (London); and Executive Director at MX Corp (2003). Board member, State Insurance Company (SIC). Over 20 years across energy, finance, telecoms, and engineering.",
-  },
+
   {
     id: 3,
     name: "Richard Allan Whalley",
@@ -63,6 +56,96 @@ const teamMembers = [
       "Managing operational timelines and resource allocation for complex energy campaigns. Focus on client communication and site-level efficiency.",
   },
 ];
+
+const SmallCard = ({ member, onClick }: { member: any; onClick: () => void }) => {
+  if (!member) return null;
+  return (
+    <div
+      className="team-card group cursor-pointer opacity-0 h-[220px] lg:h-[250px] flex bg-[#0d2a23] rounded-[2rem] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-2xl hover:shadow-[#DC5817]/20 transition-all duration-500 relative"
+      onClick={onClick}
+    >
+      <div className="w-[42%] h-full relative overflow-hidden shrink-0">
+        <img
+          src={member.image}
+          alt={member.name}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="flex-1 p-6 lg:p-8 flex flex-col justify-center relative">
+        <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center mb-4 text-white/50 group-hover:border-[#DC5817]/50 group-hover:text-[#DC5817] transition-colors">
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1}
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+        </div>
+        <h3 className="text-white font-serif uppercase text-lg lg:text-xl leading-tight mb-1 group-hover:text-[#DC5817] transition-colors">
+          {member.name}
+        </h3>
+        <p className="text-[#DC5817] font-bold text-[9px] uppercase tracking-[0.2em] mt-1">
+          {member.role}
+        </p>
+
+        {/* Bottom right orange cut corner with arrow */}
+        <div className="absolute bottom-0 right-0 w-10 h-10 bg-[#DC5817] rounded-tl-[1.25rem] flex items-center justify-center transform group-hover:bg-[#b84610] transition-colors duration-300">
+          <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 19l16-16m0 0h-8m8 0v8"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const LargeCard = ({ member, onClick }: { member: any; onClick: () => void }) => {
+  if (!member) return null;
+  return (
+    <div
+      className="team-card group cursor-pointer opacity-0 flex flex-col bg-[#0d2a23] rounded-[2.5rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.15)] hover:shadow-2xl hover:shadow-[#DC5817]/20 transition-all duration-500 h-auto lg:h-[532px] relative"
+      onClick={onClick}
+    >
+      {/* Crown Icon */}
+      {/* <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 h-12 bg-[#DC5817] rounded-b-xl flex items-center justify-center z-20 shadow-md">
+        <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M5 3l4 6 3-6 3 6 4-6v15H5V3z"
+          />
+        </svg>
+      </div> */}
+
+      <div className="relative w-full h-full overflow-hidden shrink-0">
+        <img
+          src={member.image}
+          alt={member.name}
+          className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+        />
+        {/* Decorative subtle dot pattern for large card */}
+        <div className="absolute top-0 right-0 w-48 h-48 opacity-10 bg-[radial-gradient(white_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+      </div>
+
+      {/* Overlapping white card */}
+      <div className="bg-white mx-5 -mt-44 p-8 rounded-[2rem] relative z-10 flex flex-col items-center text-center border border-black/5">
+        <h3 className="text-black font-serif uppercase text-2xl lg:text-[1.5rem] leading-tight mb-2 group-hover:text-[#DC5817] transition-colors">
+          {member.name}
+        </h3>
+        <p className="text-[#DC5817] font-bold text-[10px] uppercase tracking-[0.2em] mb-4">
+          {member.role}
+        </p>
+      </div>
+    </div>
+  );
+};
 
 const TeamPage = () => {
   const { isLoaded } = useLoading();
@@ -132,7 +215,7 @@ const TeamPage = () => {
         },
       );
 
-      // Background lines animation
+      // Background connection lines (subtle diagonal lines)
       const lines = gsap.utils.toArray<SVGPathElement>(".connect-line");
       lines.forEach((line) => {
         const length = line.getTotalLength();
@@ -141,9 +224,9 @@ const TeamPage = () => {
         gsap.to(line, {
           strokeDashoffset: 0,
           scrollTrigger: {
-            trigger: line,
-            start: "top 90%",
-            end: "bottom 10%",
+            trigger: gridRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
             scrub: 1,
           },
         });
@@ -192,107 +275,82 @@ const TeamPage = () => {
       <Navbar />
 
       <section className="relative py-32 overflow-hidden">
-        {/* Connection Lines Background */}
-        <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-          <svg className="w-full h-full opacity-30" viewBox="0 0 1440 2000" fill="none">
-            {/* Horizontal Lines */}
-            <path className="connect-line" d="M0 400 L1440 400" stroke="#13642C" strokeWidth="1" />
-            <path className="connect-line" d="M0 800 L1440 800" stroke="#DC5817" strokeWidth="1" />
+        {/* Delicate Connecting Lines matching the reference */}
+        <div className="absolute inset-0 pointer-events-none z-0 flex items-center justify-center">
+          <svg
+            className="w-full h-full max-w-[1400px] opacity-20"
+            viewBox="0 0 1400 800"
+            fill="none"
+          >
+            {/* Top Left Line */}
+            <path className="connect-line" d="M700 400 L300 200" stroke="#13642C" strokeWidth="1" />
+            {/* Bottom Left Line */}
+            <path className="connect-line" d="M700 400 L300 600" stroke="#13642C" strokeWidth="1" />
+            {/* Top Right Line */}
             <path
               className="connect-line"
-              d="M0 1200 L1440 1200"
+              d="M700 400 L1100 200"
               stroke="#13642C"
               strokeWidth="1"
             />
+            {/* Bottom Right Line */}
             <path
               className="connect-line"
-              d="M0 1600 L1440 1600"
-              stroke="#DC5817"
+              d="M700 400 L1100 600"
+              stroke="#13642C"
               strokeWidth="1"
-            />
-
-            {/* Vertical Lines */}
-            <path className="connect-line" d="M200 0 V2000" stroke="#13642C" strokeWidth="0.5" />
-            <path className="connect-line" d="M1240 0 V2000" stroke="#DC5817" strokeWidth="0.5" />
-
-            {/* Diagonal "circuit" lines */}
-            <path
-              className="connect-line"
-              d="M200 400 L400 600 L1000 600 L1240 400"
-              stroke="#13642C"
-              strokeWidth="2"
-              strokeDasharray="10 10"
-            />
-            <path
-              className="connect-line"
-              d="M1240 800 L1040 1000 L440 1000 L200 800"
-              stroke="#DC5817"
-              strokeWidth="2"
-              strokeDasharray="10 10"
-            />
-            <path
-              className="connect-line"
-              d="M200 1200 L400 1400 L1000 1400 L1240 1200"
-              stroke="#13642C"
-              strokeWidth="2"
-              strokeDasharray="10 10"
             />
           </svg>
         </div>
 
         <div className="container mx-auto px-4 max-w-7xl relative z-10">
-          <div className="team-header text-center mb-20 space-y-4">
-            {/* <p className="text-xs font-bold uppercase tracking-[0.4em] text-[#DC5817] opacity-0">
-              Our Human Capital
-            </p> */}
-            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none opacity-0">
-              Meet <span className="text-foreground/15">the</span> team
+          <div className="team-header text-center mb-8 space-y-4">
+            <h2 className="text-5xl md:text-7xl font-serif uppercase tracking-tight leading-none opacity-0">
+              Meet <span className="text-foreground/20">the</span> team
             </h2>
           </div>
 
           <div
             ref={gridRef}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-6"
+            className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,1.2fr)_1fr] gap-6 lg:gap-8 max-w-[1400px] mx-auto"
           >
-            {teamMembers.map((member) => (
-              <div
-                key={member.id}
-                className="team-card group cursor-pointer opacity-0"
-                onClick={() => setSelectedMember(member)}
-              >
-                <div className="relative aspect-3/4 rounded-2xl overflow-hidden shadow-xl mb-6 bg-gray-100 transform transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:ring-1 group-hover:ring-[#DC5817]/50">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                  />
+            {/* Left Column */}
+            <div className="flex flex-col gap-6 lg:gap-8 justify-center">
+              <SmallCard
+                member={teamMembers[1]}
+                onClick={() => setSelectedMember(teamMembers[1])}
+              />
+              <SmallCard
+                member={teamMembers[3]}
+                onClick={() => setSelectedMember(teamMembers[3])}
+              />
+            </div>
 
-                  {/* Decorative corner */}
-                  <div className="absolute top-0 right-0 w-16 h-16 bg-[#DC5817] translate-x-8 -translate-y-8 rotate-45 group-hover:translate-x-6 group-hover:-translate-y-6 transition-transform duration-500" />
+            {/* Center Column (CEO) */}
+            <div className="flex flex-col">
+              <LargeCard
+                member={teamMembers[0]}
+                onClick={() => setSelectedMember(teamMembers[0])}
+              />
+            </div>
 
-                  {/* Bottom info overlay (mobile only) */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 to-transparent md:hidden">
-                    <p className="text-white font-bold text-lg">{member.name}</p>
-                    <p className="text-white/70 text-xs uppercase tracking-widest">{member.role}</p>
-                  </div>
-                </div>
-
-                <div className="hidden md:block space-y-1">
-                  <h3 className="text-2xl font-black text-[#13642C] uppercase tracking-tight group-hover:text-[#DC5817] transition-colors">
-                    {member.name}
-                  </h3>
-                  <p className="text-[#DC5817] font-bold uppercase tracking-widest text-xs opacity-70">
-                    {member.role}
-                  </p>
-                </div>
-              </div>
-            ))}
+            {/* Right Column */}
+            <div className="flex flex-col gap-6 lg:gap-8 justify-center">
+              <SmallCard
+                member={teamMembers[2]}
+                onClick={() => setSelectedMember(teamMembers[2])}
+              />
+              <SmallCard
+                member={teamMembers[4]}
+                onClick={() => setSelectedMember(teamMembers[4])}
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Team Video Section */}
-      <section className="py-24 bg-transparent">
+      <section className="py-5 bg-transparent">
         <div className="container mx-auto px-4 max-w-7xl">
           <div
             ref={videoRef}
@@ -387,10 +445,10 @@ const TeamPage = () => {
 
               <div className="space-y-4 w-full">
                 <div className="space-y-1">
-                  <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#DC5817]">
+                  {/* <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#DC5817]">
                     Team Member Profile
-                  </p>
-                  <h2 className="text-3xl md:text-4xl font-black text-[#13642C] uppercase tracking-tight leading-tight">
+                  </p> */}
+                  <h2 className="text-2xl font-black text-[#13642C] uppercase tracking-tight leading-tight">
                     {selectedMember.name}
                   </h2>
                   <p className="text-[#DC5817] font-bold uppercase tracking-widest text-xs py-1.5 px-3 bg-[#DC5817]/10 inline-block rounded-md mt-4 mx-auto">
