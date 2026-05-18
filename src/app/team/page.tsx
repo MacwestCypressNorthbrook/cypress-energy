@@ -39,22 +39,22 @@ const teamMembers = [
     description:
       "Richard Allan Whalley earned a BSc in Biochemistry and Food Technology from the University of Leeds and later pursued professional qualifications in Accounting and Finance with CIMA. He also completed executive development programs with PricewaterhouseCoopers, INSEAD, and the Cranfield School of Management.\n\nHe began his career as a Graduate Trainee Accountant with Sandoz Holdings (now part of Clariant and Novartis), where he gained experience in the global pharmaceutical sector. In 2001, he was appointed Group Finance Director at Wier Holdings Limited, with responsibility for Finance, Human Resources, and IT across operations in the UK, France, Spain, Belgium, and Denmark.\n\nRichard went on to serve as Finance Director with the International Land Development Company/John Murphy Construction in 2005, where he managed financial operations and cashflow during a period of significant growth in civil construction and infrastructure projects. His work in these sectors sharpened his expertise in managing complex, multi-country operations and aligning financial strategy with business expansion.\n\nToday, Richard serves as Director of Finance for Cypress Energy Ghana Limited, where he applies more than three decades of international finance experience to support the company’s mission of driving energy and infrastructure growth across Africa.",
   },
-  {
-    id: 5,
-    name: "Efua Mensah",
-    role: "QHSE Manager",
-    image: "/images/73224431b07073688c4d4a54a934121c-xlarge.jpg",
-    description:
-      "Leading our Quality, Health, Safety, and Environment initiatives. Expert in international safety standards and environmental compliance for offshore energy projects.",
-  },
-  {
-    id: 6,
-    name: "Kojo Adu",
-    role: "Project Coordinator",
-    image: "/images/82ba594d30689685b54ef85f85c0f870-xlarge.jpg",
-    description:
-      "Managing operational timelines and resource allocation for complex energy campaigns. Focus on client communication and site-level efficiency.",
-  },
+  // {
+  //   id: 5,
+  //   name: "Efua Mensah",
+  //   role: "QHSE Manager",
+  //   image: "/images/73224431b07073688c4d4a54a934121c-xlarge.jpg",
+  //   description:
+  //     "Leading our Quality, Health, Safety, and Environment initiatives. Expert in international safety standards and environmental compliance for offshore energy projects.",
+  // },
+  // {
+  //   id: 6,
+  //   name: "Kojo Adu",
+  //   role: "Project Coordinator",
+  //   image: "/images/82ba594d30689685b54ef85f85c0f870-xlarge.jpg",
+  //   description:
+  //     "Managing operational timelines and resource allocation for complex energy campaigns. Focus on client communication and site-level efficiency.",
+  // },
 ];
 
 const SmallCard = ({ member, onClick }: { member: any; onClick: () => void }) => {
@@ -131,12 +131,12 @@ const LargeCard = ({ member, onClick }: { member: any; onClick: () => void }) =>
           className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
         />
         {/* Decorative subtle dot pattern for large card */}
-        <div className="absolute top-0 right-0 w-48 h-48 opacity-10 bg-[radial-gradient(white_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+        <div className="absolute top-0 right-0 w-48 h-48 opacity-10 bg-[radial-gradient(white_1px,transparent_1px)] bg-size-[16px_16px] pointer-events-none" />
       </div>
 
       {/* Overlapping white card */}
-      <div className="bg-white mx-5 -mt-44 p-8 rounded-[2rem] relative z-10 flex flex-col items-center text-center border border-black/5">
-        <h3 className="text-black font-serif uppercase text-2xl lg:text-[1.5rem] leading-tight mb-2 group-hover:text-[#DC5817] transition-colors">
+      <div className="bg-[#0d2a23] mx-5 -mt-44 p-8 rounded-[2rem] relative z-10 flex flex-col items-center text-center border border-black/5">
+        <h3 className="text-white font-serif uppercase text-2xl lg:text-[1.5rem] leading-tight mb-2 group-hover:text-[#DC5817] transition-colors">
           {member.name}
         </h3>
         <p className="text-[#DC5817] font-bold text-[10px] uppercase tracking-[0.2em] mb-4">
@@ -470,14 +470,17 @@ const TeamPage = () => {
 
                 <div className="w-12 h-1 bg-[#13642C] mx-auto shrink-0 mb-6" />
 
-                <div 
+                <div
                   className="prose prose-slate max-w-none overflow-y-auto overscroll-contain min-h-0 grow pr-2 custom-scrollbar"
                   data-lenis-prevent="true"
                 >
-                  {selectedMember.description.split('\n').map((paragraph: string, idx: number) => {
+                  {selectedMember.description.split("\n").map((paragraph: string, idx: number) => {
                     if (!paragraph.trim()) return null;
                     return (
-                      <p key={idx} className="text-muted-foreground text-left text-base leading-relaxed font-medium mb-4 last:mb-0">
+                      <p
+                        key={idx}
+                        className="text-muted-foreground text-left text-base leading-relaxed font-medium mb-4 last:mb-0"
+                      >
                         {paragraph.trim()}
                       </p>
                     );

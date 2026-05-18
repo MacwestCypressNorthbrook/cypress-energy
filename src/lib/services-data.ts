@@ -35,7 +35,7 @@ export const services: ServiceData[] = [
       "24/7 operational support",
     ],
     ctaType: "booking",
-    image: "/images/services/offshore vessel supply.avif",
+    image: "/images/selected_services/service_1.jpeg",
   },
   {
     slug: "manpower",
@@ -52,7 +52,7 @@ export const services: ServiceData[] = [
       "Offshore crew management",
     ],
     ctaType: "contact",
-    image: "/images/services/manpower managemnt.jpg",
+    image: "/images/selected_services/service_2.jpeg",
   },
   {
     slug: "jack-up-drilling-rigs",
@@ -68,7 +68,7 @@ export const services: ServiceData[] = [
       "Workover and well intervention",
     ],
     ctaType: "booking",
-    image: "/images/services/pipe 4.avif",
+    image: "/images/selected_services/service_3.jpeg",
   },
   {
     slug: "power-generation",
@@ -85,7 +85,7 @@ export const services: ServiceData[] = [
       "Power generation packages",
     ],
     ctaType: "booking",
-    image: "/images/services/power gen 1.jpg",
+    image: "/images/selected_services/service_4.jpeg",
   },
   {
     slug: "geo-seismic-surveys",
@@ -106,7 +106,7 @@ export const services: ServiceData[] = [
       "Geotechnical vessel supply",
     ],
     ctaType: "booking",
-    image: "/images/services/Hero Image.avif",
+    image: "/images/selected_services/service_5.jpeg",
   },
   {
     slug: "geophysical-surveys",
@@ -123,7 +123,7 @@ export const services: ServiceData[] = [
       "Daily progress reports",
     ],
     ctaType: "booking",
-    image: "/images/services/Hero Image.avif",
+    image: "/images/selected_services/service_6.jpeg",
   },
   {
     slug: "onshore-service-base",
@@ -139,7 +139,7 @@ export const services: ServiceData[] = [
       "Maintenance workshops",
     ],
     ctaType: "booking",
-    image: "/images/services/Hero Image 2.jpg",
+    image: "/images/selected_services/service_7.jpeg",
   },
   {
     slug: "onshore-base-equipment",
@@ -152,7 +152,7 @@ export const services: ServiceData[] = [
     listLabel: "Equipment",
     items: ["Forklifts", "Cranes", "Generators"],
     ctaType: "booking",
-    image: "/images/services/power gen 2.jpg",
+    image: "/images/selected_services/service_8.jpeg",
   },
   {
     slug: "pipe-supply-and-storage",
@@ -169,7 +169,7 @@ export const services: ServiceData[] = [
       "Specialty coating application",
     ],
     ctaType: "booking",
-    image: "/images/services/pipe.avif",
+    image: "/images/selected_services/service_9.jpeg",
   },
   {
     slug: "local-fabrication",
@@ -186,7 +186,7 @@ export const services: ServiceData[] = [
       "Custom structural steel",
     ],
     ctaType: "booking",
-    image: "/images/services/pipe 3.avif",
+    image: "/images/selected_services/service_10.jpeg",
   },
   {
     slug: "logistics-freight-forwarding",
@@ -203,7 +203,7 @@ export const services: ServiceData[] = [
       "Distribution and last-mile delivery",
     ],
     ctaType: "booking",
-    image: "/images/services/pipe 2.avif",
+    image: "/images/selected_services/service_11.jpeg",
   },
   {
     slug: "housing-accommodation",
@@ -224,7 +224,7 @@ export const services: ServiceData[] = [
       "Catering and housekeeping",
     ],
     ctaType: "booking",
-    image: "/images/services/ship chandling 1.avif",
+    image: "/images/selected_services/service_12.jpeg",
   },
   {
     slug: "hospitality-ship-chandling",
@@ -242,7 +242,7 @@ export const services: ServiceData[] = [
       "Ship chandling and provisioning",
     ],
     ctaType: "booking",
-    image: "/images/services/ship chandling.avif",
+    image: "/images/selected_services/service_13.jpeg",
   },
 ];
 

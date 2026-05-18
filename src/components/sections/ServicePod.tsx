@@ -105,10 +105,10 @@ const ServicePod: React.FC<ServicePodProps> = ({
                 ref={imageRef}
                 src={image}
                 alt={title}
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000"
+                className="w-full h-full object-cover transition-all duration-1000"
               />
             </div>
-            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-700" />
+
           </div>
         </div>
       </div>
@@ -211,7 +211,7 @@ const ServicePod: React.FC<ServicePodProps> = ({
               className="w-full h-full object-cover transition-all duration-1000"
             />
           </div>
-          <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-700" />
+
 
           <div className="absolute top-6 right-6 w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center">
             <span className="text-white font-display text-lg font-bold">{index + 1}</span>

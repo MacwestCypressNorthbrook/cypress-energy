@@ -77,7 +77,7 @@ const ProjectsHero: React.FC<ProjectsHeroProps> = ({ title, subtitle, image }) =
             <img src={image} className="w-full h-full object-cover" alt={title} />
           </div>
 
-          <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-1000" />
+
 
           {/* Bottom Right Overlay Link */}
           <div className="absolute bottom-0 right-0 bg-[#EDF6F0] pl-6 pt-6 md:pl-8 md:pt-8 rounded-tl-[25px] flex flex-col items-end">

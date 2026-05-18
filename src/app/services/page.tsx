@@ -17,7 +17,7 @@ export default function ServicesPage() {
       <ServicesHero
         title="Integrated Energy Solutions"
         subtitle="Cypress Energy delivers world-class offshore and onshore support solutions tailored to the complex needs of the oil and gas industry in West Africa."
-        image="/images/services/offshore vessel supply.avif"
+        image="/images/selected_services/service_hero.jpeg"
       />
 
       {/* Services Pods */}

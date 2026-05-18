@@ -30,7 +30,7 @@ export const projects: ProjectData[] = [
       "Laboratory analysis",
       "Integration with Eni's engineering models",
     ],
-    image: "/images/7258b77a67b56c443499f654e54770f0-xlarge.jpg",
+    image: "/images/selected_projects/project_1.jpeg",
   },
   {
     id: 2,
@@ -46,7 +46,7 @@ export const projects: ProjectData[] = [
     ],
     description:
       "24/7 offshore survey support including real-time vessel tracking and full HSE compliance reporting.",
-    image: "/images/73224431b07073688c4d4a54a934121c-xlarge.jpg",
+    image: "/images/selected_projects/project_2.jpeg",
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ export const projects: ProjectData[] = [
     ],
     description:
       "Full supply chain coordination for Borr Drilling's campaign supporting ENI's upstream programme in Ghana.",
-    image: "/images/b0d832026d85ab88e1515a1fccb38c06-xlarge.jpg",
+    image: "/images/selected_projects/project_3.jpeg",
   },
   {
     id: 4,
@@ -75,7 +75,7 @@ export const projects: ProjectData[] = [
     ],
     description:
       "Manpower and equipment provision for riser operations at the Santorini jetty, conducted under SAIPEM HSE standards.",
-    image: "/images/a0ffdfc3098ae4216a73aa885862cbc1-xlarge.jpg",
+    image: "/images/selected_projects/project_4.jpeg",
   },
   {
     id: 5,
@@ -84,7 +84,7 @@ export const projects: ProjectData[] = [
     services: ["Manpower supply", "Base equipment provision"],
     description:
       "Logistics and equipment support for loading operations aboard the Ametrine Valor.",
-    image: "/images/82ba594d30689685b54ef85f85c0f870-xlarge.jpg",
+    image: "/images/selected_projects/project_5.jpeg",
   },
   {
     id: 6,
@@ -98,7 +98,7 @@ export const projects: ProjectData[] = [
     ],
     description:
       "Integrated vessel, equipment, and personnel services across SAIPEM's DVD and Santorini drilling campaigns.",
-    image: "/images/389f3831e643a07448afb80f4dd3b8ad-xlarge.jpg",
+    image: "/images/selected_projects/project_6.jpeg",
   },
   {
     id: 7,
@@ -107,7 +107,7 @@ export const projects: ProjectData[] = [
     services: ["Vessel provision", "Crewing", "Mob/demob services"],
     description:
       "Full vessel management and crew provision for the JP88 Stork supporting ENI's survey and drilling programme.",
-    image: "/images/abd9674e79b5d94da4786412caac4e48-xlarge.jpg",
+    image: "/images/selected_projects/project_7.jpeg",
   },
   {
     id: 8,
@@ -116,7 +116,7 @@ export const projects: ProjectData[] = [
     services: ["AHTS deployment", "Emergency tow-back readiness"],
     description:
       "AHTS deployment supporting FPSO–tanker synchronisation and emergency tow-back preparedness under Tullow HSE protocols.",
-    image: "/images/1bb29c36ab5595291b975f0e0daafc0c-xlarge.jpg",
+    image: "/images/selected_projects/project_8.jpeg",
   },
   {
     id: 9,
@@ -125,6 +125,6 @@ export const projects: ProjectData[] = [
     services: ["Guard vessel operations", "Security manpower"],
     description:
       "Guard vessel and security operations supporting ENI's OCTP field development.",
-    image: "/images/b3a19530762e323f6328c70a926d6479-xlarge.jpg",
+    image: "/images/selected_projects/project_9.jpeg",
   },
 ];

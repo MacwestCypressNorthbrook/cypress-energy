@@ -17,7 +17,7 @@ export default function ProjectsPage() {
       <ProjectsHero
         title="Engineering Success Across West Africa"
         subtitle="Explore our portfolio of complex offshore campaigns, technical surveys, and logistics support for the world's leading energy operators."
-        image="/images/abd9674e79b5d94da4786412caac4e48-xlarge.jpg"
+        image="/images/selected_projects/project_hero.jpeg"
       />
 
       {/* Project Pods */}
