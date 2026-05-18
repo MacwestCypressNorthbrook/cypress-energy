@@ -121,7 +121,7 @@ const CEOMessage = () => {
             <div className="lg:col-span-5 order-2 lg:order-1">
               <div className="ceo-image-wrapper relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src="/images/team/ceo.webp"
+                  src="/images/team/CEO.webp"
                   alt="Kwabena Amponsah Osei-Bonsu"
                   className="w-full h-auto transition-all duration-1000"
                 />

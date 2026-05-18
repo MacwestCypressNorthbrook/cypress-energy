@@ -18,7 +18,7 @@ const teamMembers = [
     id: 1,
     name: "Kwabena Amponsah Osei-Bonsu",
     role: "Chief Executive Officer",
-    image: "/images/team/ceo.webp",
+    image: "/images/team/CEO.webp",
     description:
       "Kwabena Amponsah Osei-Bonsu is an accomplished business leader with more than thirty years of experience in land economy, valuation, and corporate governance. He holds a Bachelor of Science (Honors) degree in Land Economy from the Kwame Nkrumah University of Science and Technology.\n\nHis career began at the Land Valuation Board in Accra, where he contributed to national-scale property valuation projects. He later joined Chinbuah, Owusu-Adjapong & Partners Limited, where he distinguished himself in complex valuation and estate management assignments.\n\nMr. Osei-Bonsu is a Fellow of the Ghana Institution of Surveyors (GhIS), where he has played active leadership roles as a member of the Board of Examiners and the Divisional Committee for the Valuation and Estate section. His governance experience spans both local and international organizations. He serves on the boards of KOA Consult, Macwest Limited, Waterbridge Ltd., and Bumi Armada Sharpooji & Pallonji Limited, as well as Bumi Armada Ghana Limited, affiliations that have given him significant exposure to multinational operations and global business practices.\n\nAs Chief Executive Officer of Cypress Energy, Mr. Osei-Bonsu brings together technical expertise, institutional knowledge, and strategic leadership. He is committed to strengthening the company’s role as a trusted partner in Ghana’s energy sector, driving growth while positioning the firm within a wider regional context.",
   },
