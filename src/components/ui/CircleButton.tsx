@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import TransitionLink from "../TransitionLink";
+import { cn } from "@/lib/utils";
 
 interface CircleButtonProps {
   href: string;
@@ -34,13 +35,12 @@ const CircleButton: React.FC<CircleButtonProps> = ({
       href={href}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className={`
-        relative inline-flex items-center min-w-[170px] px-8 pt-[10px] pb-[12px] 
-        rounded-full overflow-hidden transition-all
-        ${isHovered ? `${hoverBaseBg} text-white` : `${baseBg} ${textColor}`}
-        ${!show ? "opacity-0 pointer-events-none" : ""}
-        ${className}
-      `}
+      className={cn(
+        "relative inline-flex items-center min-w-[170px] px-8 pt-[10px] pb-[12px] rounded-full overflow-hidden transition-all",
+        isHovered ? `${hoverBaseBg} text-white` : `${baseBg} ${textColor}`,
+        !show && "opacity-0 pointer-events-none",
+        className
+      )}
       style={{
         // Match reference: Text color transitions, background switches instantly after delay on enter
         // On exit, background switches back instantly, text color transitions back

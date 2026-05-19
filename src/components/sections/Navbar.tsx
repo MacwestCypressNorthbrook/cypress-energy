@@ -502,7 +502,7 @@ const Navbar = () => {
             <CircleButton
               href="/contact"
               variant="secondary"
-              className="hidden md:inline-flex scale-90"
+              className="hidden lg:inline-flex scale-90"
             >
               Contact Us
             </CircleButton>

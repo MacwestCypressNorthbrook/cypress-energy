@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import CircleButton from "@/components/ui/CircleButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,14 +24,13 @@ const AboutUs = () => {
             y: 0,
             opacity: 1,
             rotateX: 0,
-            duration: 1,
-            stagger: 0.1,
-            ease: "none",
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "power2.out",
             scrollTrigger: {
               trigger: headingRef.current,
               start: "top 95%",
-              end: "bottom 70%",
-              scrub: 1,
+              once: true,
             },
           },
         );
@@ -44,14 +43,13 @@ const AboutUs = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.2,
-          ease: "none",
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: ".about-text-content",
             start: "top 90%",
-            end: "bottom 60%",
-            scrub: 1,
+            once: true,
           },
         },
       );
@@ -124,7 +122,7 @@ const AboutUs = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-transparent" ref={containerRef}>
+    <section className="py-5 md:py-24 bg-transparent" ref={containerRef}>
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           {/* LEFT — text content */}

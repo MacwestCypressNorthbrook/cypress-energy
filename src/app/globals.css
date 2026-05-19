@@ -193,6 +193,16 @@
   .will-change-transform {
     will-change: transform;
   }
+  .hero-clip-mask {
+    clip-path: none;
+    border-radius: 2rem;
+  }
+  @media (min-width: 768px) {
+    .hero-clip-mask {
+      clip-path: url(#hero-clip-desktop);
+      border-radius: 0;
+    }
+  }
 }
 
 @keyframes energy-flow {

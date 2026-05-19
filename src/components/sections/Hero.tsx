@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLoading } from "@/context/LoadingContext";
-import { useIsMobile } from "@/hooks/use-mobile";
 import CircleButton from "../ui/CircleButton";
 
 const slides = [
@@ -138,10 +137,8 @@ const Hero = () => {
     ));
   };
 
-  const isMobile = useIsMobile();
-
   return (
-    <section className="bg-transparent pt-0 md:pt-4 pb-6 px-0 md:px-4" ref={containerRef}>
+    <section className="bg-transparent  pt-2 md:pt-4 pb-6 px-1 md:px-4" ref={containerRef}>
       {/* SVG for the connecting line animation */}
       <svg
         ref={svgRef}
@@ -170,12 +167,7 @@ const Hero = () => {
         </defs>
       </svg>
 
-      <div
-        style={!isMobile ? { clipPath: "url(#hero-clip-desktop)" } : {}}
-        className={`relative w-full h-[80vh] md:h-screen flex items-center justify-center bg-black overflow-hidden ${
-          isMobile ? "rounded-b-[1.5rem]" : ""
-        }`}
-      >
+      <div className="hero-clip-mask relative w-full h-[80vh] md:h-screen flex items-center justify-center bg-black overflow-hidden">
         {/* Single Image Background */}
         <div className="hero-bg-zoom absolute inset-0">
           <div
@@ -212,7 +204,11 @@ const Hero = () => {
               {/* <PremiumButton href={slide.ctaHref} label={slide.ctaLabel} /> */}
               {/* <MaskButton text="Contact Us" backgroundColor="#fd7435" /> */}
 
-              <CircleButton href={slide.ctaHref} variant="secondary" className="hidden md:inline-flex">
+              <CircleButton
+                href={slide.ctaHref}
+                variant="secondary"
+                className="hidden md:inline-flex"
+              >
                 {slide.ctaLabel}
               </CircleButton>
             </div>

@@ -86,20 +86,20 @@ const Services = () => {
           duration: 0.9,
           ease: "power2.out",
           scrollTrigger: { trigger: containerRef.current, start: "top 85%", once: true },
-        }
+        },
       );
 
       const wrappers = gsap.utils.toArray<HTMLElement>(".bento-item-wrapper");
-      
+
       const directions = [
         { x: "-101%", y: "0%" }, // 01: From Left
         { x: "0%", y: "-101%" }, // 02: From Top
-        { x: "101%", y: "0%" },  // 03: From Right
-        { x: "0%", y: "101%" },  // 04: From Bottom
+        { x: "101%", y: "0%" }, // 03: From Right
+        { x: "0%", y: "101%" }, // 04: From Bottom
         { x: "-101%", y: "0%" }, // 05: From Left
-        { x: "0%", y: "101%" },  // 06: From Bottom
-        { x: "101%", y: "0%" },  // 07: From Right
-        { x: "0%", y: "101%" },  // 08: From Bottom
+        { x: "0%", y: "101%" }, // 06: From Bottom
+        { x: "101%", y: "0%" }, // 07: From Right
+        { x: "0%", y: "101%" }, // 08: From Bottom
       ];
 
       wrappers.forEach((wrapper, i) => {
@@ -121,17 +121,16 @@ const Services = () => {
               end: "bottom 90%", // Fully settle as soon as the bottom of the card is visible
               scrub: true, // Use true instead of 1.2 to prevent double-smoothing lag with Lenis
             },
-          }
+          },
         );
       });
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
     <section className="relative py-16 md:py-24 bg-transparent overflow-hidden" ref={containerRef}>
       <div className="container mx-auto px-4 max-w-7xl">
-        
         {/* Section Heading */}
         <div className="services-section-heading mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-3">
@@ -151,10 +150,10 @@ const Services = () => {
         {/* Bento Grid */}
         <div className="bento-grid grid grid-cols-1 md:grid-cols-4 auto-rows-[280px] md:auto-rows-[320px] gap-4 md:gap-6 grid-flow-row-dense">
           {serviceList.map((service, i) => (
-            <div 
-              key={service.id} 
+            <div
+              key={service.id}
               className={`bento-item-wrapper ${bentoClasses[i]} rounded-[2rem] overflow-hidden`}
-              style={{ backgroundColor: 'transparent' }} 
+              style={{ backgroundColor: "transparent" }}
             >
               <TransitionLink
                 href={service.href}
@@ -168,7 +167,7 @@ const Services = () => {
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-500" />
-                
+
                 {/* Content Overlay */}
                 <div className="relative z-10 w-full h-full flex flex-col justify-end p-6 md:p-8">
                   <div className="flex items-end justify-between gap-4">
@@ -180,11 +179,21 @@ const Services = () => {
                         {service.title}
                       </h3>
                     </div>
-                    
+
                     {/* Hover Arrow Icon */}
                     <div className="shrink-0 w-12 h-12 rounded-full bg-[#13642C] flex items-center justify-center transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                      <svg className="w-5 h-5 text-white -rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      <svg
+                        className="w-5 h-5 text-white -rotate-45"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2.5}
+                          d="M14 5l7 7m0 0l-7 7m7-7H3"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -193,14 +202,13 @@ const Services = () => {
             </div>
           ))}
         </div>
-        
+
         {/* Mobile View All Link */}
         <div className="mt-10 flex justify-center md:hidden">
           <CircleButton href="/services" variant="secondary">
             View All Services
           </CircleButton>
         </div>
-
       </div>
     </section>
   );
