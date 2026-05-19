@@ -130,9 +130,10 @@ export default function AboutPage() {
             <div className="relative">
               <div className="rounded-[3rem] overflow-hidden aspect-square shadow-2xl">
                 <img
-                  src="/images/1H6A2643-scaled.jpeg"
+                  // src="/images/1H6A2643-scaled.jpeg"
+                  src="/images/about/ISO-9001-C621988-0-en-US-20240910_page-0001-scaled.webp"
                   alt="Cypress Energy Operations"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-[#DC5817] rounded-[2rem] p-8 text-white shadow-xl">

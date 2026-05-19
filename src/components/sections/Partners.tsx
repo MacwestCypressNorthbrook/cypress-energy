@@ -60,11 +60,11 @@ const Partners = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 max-w-6xl">
-        <div className="partners-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 perspective-[2000px]">
+        <div className="partners-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5 perspective-[2000px]">
           {logos.map((logo, i) => (
             <div
               key={i}
-              className="partner-card group relative aspect-square bg-black/5 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center p-10 hover:bg-black/10 hover:border-white/40 transition-colors duration-300 shadow-xl"
+              className="partner-card group relative aspect-square bg-black/5 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center p-6 md:p-8 hover:bg-black/10 hover:border-white/40 transition-colors duration-300 shadow-xl"
             >
               {/* Refinement sheen */}
               <div className="absolute inset-0 bg-linear-to-br from-white/10 to-transparent opacity-30 rounded-2xl" />

@@ -27,6 +27,7 @@ export default function ProjectsPage() {
             {projects.map((project, index) => (
               <ProjectPod
                 key={project.id}
+                id={project.id}
                 index={index}
                 title={project.title}
                 client={project.client}

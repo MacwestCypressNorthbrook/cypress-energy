@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import CircleButton from "@/components/ui/CircleButton";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -9,8 +9,21 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
+  const [isCertificateOpen, setIsCertificateOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
+
+  // Handle escape key to close certificate lightbox
+  useEffect(() => {
+    if (!isCertificateOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsCertificateOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isCertificateOpen]);
 
   useGSAP(
     () => {
@@ -169,7 +182,8 @@ const AboutUs = () => {
                 <img
                   src="/images/about/ISO-9001-C621988-0-en-US-20240910_page-0001-scaled.webp"
                   alt="DNV ISO 9001:2015 Certificate"
-                  className="w-24 h-auto object-contain rounded-xl shadow-sm bg-white"
+                  className="w-24 h-auto object-contain rounded-xl shadow-sm bg-white cursor-zoom-in hover:scale-105 transition-transform duration-300"
+                  onClick={() => setIsCertificateOpen(true)}
                 />
               </div>
               <div className="space-y-2">
@@ -237,6 +251,43 @@ const AboutUs = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox for ISO Certificate */}
+      {isCertificateOpen && (
+        <div
+          className="fixed inset-0 z-99999 bg-black/30 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-300"
+          onClick={() => setIsCertificateOpen(false)}
+        >
+          <button
+            className="absolute top-6 right-6 text-white/70 hover:text-white hover:scale-110 p-3 bg-white/10 rounded-full cursor-pointer transition-all"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsCertificateOpen(false);
+            }}
+            aria-label="Close certificate lightbox"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          <div
+            className="relative max-w-[90vw] max-h-[85vh] overflow-hidden rounded-2xl bg-white p-2 shadow-2xl flex items-center justify-center animate-in zoom-in-95 duration-300"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src="/images/about/ISO-9001-C621988-0-en-US-20240910_page-0001-scaled.webp"
+              alt="DNV ISO 9001:2015 Certificate - Large view"
+              className="max-w-full max-h-[80vh] object-contain rounded-xl select-none"
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };

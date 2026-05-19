@@ -10,6 +10,7 @@ import CircleButton from "../ui/CircleButton";
 gsap.registerPlugin(ScrollTrigger);
 
 interface ProjectPodProps {
+  id: number;
   title: string;
   client: string;
   description: string;
@@ -21,6 +22,7 @@ interface ProjectPodProps {
 }
 
 const ProjectPod: React.FC<ProjectPodProps> = ({
+  id,
   title,
   client,
   description,
@@ -86,8 +88,8 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
               <div className="space-y-4 mb-10">
                 <p className="text-black/60 text-sm md:text-base leading-relaxed">{description}</p>
               </div>
-              <CircleButton href="/contact" variant="secondary" className="scale-90 origin-left">
-                Inquire
+              <CircleButton href={`/projects/${id}`} variant="secondary" className="scale-90 origin-left">
+                More Details
               </CircleButton>
             </div>
           </div>
@@ -188,8 +190,8 @@ const ProjectPod: React.FC<ProjectPodProps> = ({
                   className="absolute bottom-0 right-[99.8%] w-12 h-12"
                 />
 
-                <CircleButton show={false} href="/contact" variant="primary">
-                  Inquire
+                <CircleButton show={true} href={`/projects/${id}`} variant="primary">
+                  More Details
                 </CircleButton>
               </div>
             </div>

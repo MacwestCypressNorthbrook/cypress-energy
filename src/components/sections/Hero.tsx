@@ -119,7 +119,7 @@ const Hero = () => {
 
       gsap.to(path, {
         strokeDashoffset: 0,
-        duration: 3,
+        duration: 1,
         ease: "linear",
       });
     }
