@@ -205,7 +205,7 @@ const Footer = () => {
 
         <div className="pt-0 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold text-muted-foreground uppercase tracking-widest">
           <p>Cypress Energy Company Limited</p>
-          <p>© 2025 All Rights Reserved · Cypress Energy</p>
+          <p>© 2026 All Rights Reserved · Cypress Energy</p>
         </div>
       </div>
 

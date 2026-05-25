@@ -30,7 +30,14 @@ export default function Home() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <pattern id="topo-global" x="0" y="0" width="900" height="300" patternUnits="userSpaceOnUse">
+            <pattern
+              id="topo-global"
+              x="0"
+              y="0"
+              width="900"
+              height="300"
+              patternUnits="userSpaceOnUse"
+            >
               {[
                 { d: "M0,60 Q225,20 450,60 Q675,100 900,60", o: 0.08 },
                 { d: "M0,100 Q225,60 450,100 Q675,140 900,100", o: 0.07 },
@@ -42,7 +49,7 @@ export default function Home() {
                 <g key={i}>
                   {/* Base static line */}
                   <path d={line.d} stroke="#13642C" fill="none" strokeWidth="1" opacity={line.o} />
-                  
+
                   {/* Glowing energy flow line */}
                   <path
                     d={line.d}
@@ -52,7 +59,7 @@ export default function Home() {
                     pathLength="1"
                     className="energy-path"
                     style={{
-                      strokeDasharray: `${0.04 + (i % 4) * 0.04} 1`, 
+                      strokeDasharray: `${0.04 + (i % 4) * 0.04} 1`,
                       animationDuration: `${10 + i * 2}s`, // Slightly faster
                       animationDelay: `${i * 1.5}s`, // More compact staggering
                     }}
@@ -70,6 +77,7 @@ export default function Home() {
         <Navbar />
         <Hero />
         <AboutUs />
+        <Partners />
         <Services />
         <Advantage />
         <Projects />
@@ -78,7 +86,6 @@ export default function Home() {
         <OperationsGallery />
         <InteractiveShowcase />
         <CEOMessage />
-        <Partners />
         <Footer />
       </div>
     </main>

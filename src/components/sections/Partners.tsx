@@ -15,64 +15,96 @@ const logos = [
 ];
 
 const Partners = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLElement>(null);
 
   useGSAP(
     () => {
-      // Trigger immediate staggered spin when the grid enters the view
-      gsap.fromTo(
-        ".partner-card",
-        {
-          rotationY: 0,
-          opacity: 0,
-          scale: 0.5,
-        },
-        {
-          rotationY: 360,
-          opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          stagger: 0.08,
-          ease: "back.out(1.2)", // Adds a slight "snap" at the end
-          scrollTrigger: {
-            trigger: ".partners-grid",
-            start: "top 80%",
-            toggleActions: "play none none none", // Plays once immediately
-            once: true,
-          },
-        },
-      );
+      if (!trackRef.current) return;
+      const totalWidth = trackRef.current.scrollWidth / 2;
+      gsap.to(trackRef.current, {
+        x: -totalWidth,
+        duration: 30,
+        ease: "none",
+        repeat: -1,
+      });
     },
     { scope: containerRef },
   );
 
   return (
-    <section ref={containerRef} className="relative py-12 overflow-hidden bg-transparent">
-      <div className="relative z-10 container mx-auto px-4 max-w-7xl mb-5">
-        <div className="space-y-2 text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.4em] text-[#DC5817]">
-            Global Network
-          </p>
-          <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none">
-            Strategic <span className="text-foreground/20">Partnerships</span>
+    <section ref={containerRef} className="relative py-0 overflow-hidden">
+      {/* Topographic contour pattern */}
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        preserveAspectRatio="xMidYMid slice"
+      >
+        <defs>
+          <pattern
+            id="topo-partners"
+            x="0"
+            y="0"
+            width="700"
+            height="220"
+            patternUnits="userSpaceOnUse"
+          >
+            <path
+              d="M0,80 Q175,40 350,80 Q525,120 700,80"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.07"
+            />
+            <path
+              d="M0,115 Q175,75 350,115 Q525,155 700,115"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.05"
+            />
+            <path
+              d="M0,48 Q175,8 350,48 Q525,88 700,48"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.04"
+            />
+            <path
+              d="M0,150 Q175,110 350,150 Q525,190 700,150"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.04"
+            />
+            <path
+              d="M0,185 Q175,145 350,185 Q525,225 700,185"
+              stroke="#13642C"
+              fill="none"
+              strokeWidth="1"
+              opacity="0.03"
+            />
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#topo-partners)" />
+      </svg>
+
+      <div className="relative z-10 container mx-auto px-4 max-w-7xl mb-12">
+        <div className="space-y-2">
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+            Our <span className="text-foreground/20">Partners</span>
           </h2>
         </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 max-w-6xl">
-        <div className="partners-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 md:gap-5 perspective-[2000px]">
-          {logos.map((logo, i) => (
-            <div
-              key={i}
-              className="partner-card group relative aspect-square bg-black/5 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center p-6 md:p-8 hover:bg-black/10 hover:border-white/40 transition-colors duration-300 shadow-xl"
-            >
-              {/* Refinement sheen */}
-              <div className="absolute inset-0 bg-linear-to-br from-white/10 to-transparent opacity-30 rounded-2xl" />
-
+      <div className="relative z-10 overflow-hidden">
+        <div ref={trackRef} className="flex items-center will-change-transform">
+          {/* Original + duplicate for seamless loop */}
+          {[...logos, ...logos].map((logo, i) => (
+            <div key={i} className="shrink-0 px-10 flex items-center justify-center">
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 pointer-events-none"
+                className="h-12 md:h-16 w-auto object-contain transition-all duration-300"
                 draggable={false}
               />
             </div>
