@@ -88,13 +88,13 @@ const Partners = () => {
         <rect width="100%" height="100%" fill="url(#topo-partners)" />
       </svg>
 
-      <div className="relative z-10 container mx-auto px-4 max-w-7xl mb-12">
+      {/* <div className="relative z-10 container mx-auto px-4 max-w-7xl mb-12">
         <div className="space-y-2">
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
             Our <span className="text-foreground/20">Partners</span>
           </h2>
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 overflow-hidden">
         <div ref={trackRef} className="flex items-center will-change-transform">

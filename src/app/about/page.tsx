@@ -121,7 +121,7 @@ export default function AboutPage() {
                 hard work, resilience, and a skilled team supported by strategic partnerships with
                 international businesses.
               </p>
-              <p className="text-base text-muted-foreground font-medium leading-relaxed">
+              <p className="text-lg text-muted-foreground font-medium leading-relaxed">
                 Our collaborations give us access to global expertise and ensure our operations meet
                 international standards. From our Accra headquarters, we serve tier-1 operators
                 across West Africa's upstream oil and gas sector.
