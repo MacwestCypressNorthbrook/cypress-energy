@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   description:
     "Cypress Energy Company Limited - Delivering excellence in the oil and gas sector through innovative marine and logistics solutions in West Africa.",
   icons: {
-    icon: "/logo.png",
+    icon: "/LOGO-FOOTER-3.png",
   },
 };
 
