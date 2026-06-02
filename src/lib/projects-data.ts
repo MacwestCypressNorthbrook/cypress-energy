@@ -186,14 +186,14 @@ export const projects: ProjectData[] = [
   },
   {
     id: 8,
-    title: "Tullow Ghana — FPSO Tow-Back",
+    title: "Tullow Ghana - Provision of AHTS Vessel for tow-back operations.",
     client: "Tullow Ghana Limited",
     services: [
       "AHTS deployment",
       "Emergency tow-back readiness",
     ],
     description:
-      "AHTS deployment supporting FPSO–tanker synchronisation and emergency tow-back preparedness under Tullow HSE protocols.",
+      "Cypress Energy supplied Anchor Handling Tug Supply Vessel to support towing and retrieval of offshore drilling rigs.",
     deliveries: [
       "AHTS deployment",
       "Emergency tow-back readiness coordination",
@@ -222,6 +222,35 @@ export const projects: ProjectData[] = [
     image: "/images/selected_projects/project_9.jpeg",
     images: [
       "/images/selected_projects/project_9.jpeg",
+    ],
+  },
+  {
+    id: 10,
+    title: "Eni - Provision of AHTS Vessel for tow-back operations.",
+    client: "Eni Ghana Exploration and Production",
+    services: [
+      "AHTS deployment",
+      "Towing and retrieval",
+    ],
+    description:
+      "Cypress Energy supplied Anchor Handling Tug Supply Vessel to support towing and retrieval of offshore drilling rigs.",
+    image: "/images/projects/admin-ajax-copy.jpg",
+    images: [
+      "/images/projects/admin-ajax-copy.jpg",
+    ],
+  },
+  {
+    id: 11,
+    title: "Dolphin Geo Subsea",
+    client: "Eni Ghana Exploration and Production",
+    services: [
+      "Specialised vessel supply",
+    ],
+    description:
+      "Cypress Energy supplied Specialised vessel to support ENI's Geotechnical Campaign.",
+    image: "/images/projects/geotechnical_survey5.jpeg",
+    images: [
+      "/images/projects/geotechnical_survey5.jpeg",
     ],
   },
 ];
