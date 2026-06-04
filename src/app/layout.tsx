@@ -29,6 +29,9 @@ export const metadata: Metadata = {
 import SmoothScrolling from "@/components/SmoothScrolling";
 import PageTransition from "@/components/PageTransition";
 
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -52,6 +55,8 @@ export default function RootLayout({
           <PageTransition />
           <AppShell>{children}</AppShell>
         </SmoothScrolling>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
