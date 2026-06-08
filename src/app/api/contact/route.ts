@@ -45,7 +45,7 @@ ${message}
   <title>Cypress Energy Inquiry Brief</title>
   <style>
     body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f7f7f7; color: #1e293b; margin: 0; padding: 20px; }
-    .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-top: 4px solid #DC5817; }
+    .container { max-width: 800px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e2e8f0; border-top: 4px solid #DC5817; }
     .header { padding: 30px; background-color: #1a1a1a; text-align: left; }
     .header h1 { color: #ffffff; margin: 0; font-size: 18px; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase; }
     .header span { color: #DC5817; }
