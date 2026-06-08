@@ -48,6 +48,8 @@ export default function ContactPage() {
   const formRef = useRef<HTMLDivElement>(null);
   const officesRef = useRef<HTMLDivElement>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useGSAP(
     () => {
@@ -329,12 +331,37 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
-                    setSubmitted(true);
+                    setIsLoading(true);
+                    setError(null);
+                    const formData = new FormData(e.currentTarget);
+                    const data = Object.fromEntries(formData.entries());
+                    try {
+                      const res = await fetch("/api/contact", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(data),
+                      });
+                      if (res.ok) {
+                        setSubmitted(true);
+                      } else {
+                        const errorData = await res.json();
+                        setError(errorData.error || "Failed to send message. Please try again later.");
+                      }
+                    } catch (err) {
+                      setError("An unexpected error occurred. Please try again.");
+                    } finally {
+                      setIsLoading(false);
+                    }
                   }}
                   className="space-y-5"
                 >
+                  {error && (
+                    <div className="p-4 rounded-xl bg-red-50 border border-red-100 text-red-600 text-sm font-medium">
+                      {error}
+                    </div>
+                  )}
                   <div className="form-field grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-xs font-bold uppercase tracking-widest">
@@ -342,8 +369,10 @@ export default function ContactPage() {
                       </label>
                       <input
                         required
-                        className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors"
+                        name="firstName"
+                        className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors disabled:opacity-50"
                         placeholder="John"
+                        disabled={isLoading}
                       />
                     </div>
                     <div className="space-y-2">
@@ -352,8 +381,10 @@ export default function ContactPage() {
                       </label>
                       <input
                         required
-                        className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors"
+                        name="lastName"
+                        className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors disabled:opacity-50"
                         placeholder="Doe"
+                        disabled={isLoading}
                       />
                     </div>
                   </div>
@@ -362,23 +393,27 @@ export default function ContactPage() {
                     <input
                       required
                       type="email"
-                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors"
+                      name="email"
+                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors disabled:opacity-50"
                       placeholder="john@company.com"
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="form-field space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest">Phone</label>
                     <input
                       type="tel"
-                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors"
+                      name="phone"
+                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors disabled:opacity-50"
                       placeholder="+233 ..."
+                      disabled={isLoading}
                     />
                   </div>
                   <div className="form-field space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest">
                       Enquiry Type
                     </label>
-                    <select className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors bg-white">
+                    <select name="service" disabled={isLoading} className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors bg-white disabled:opacity-50">
                       <option value="">Select a service...</option>
                       {enquiryTypes.map((type) => (
                         <option key={type} value={type}>
@@ -390,17 +425,31 @@ export default function ContactPage() {
                   <div className="form-field space-y-2">
                     <label className="text-xs font-bold uppercase tracking-widest">Message</label>
                     <textarea
+                      required
                       rows={5}
-                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors resize-none"
+                      name="message"
+                      disabled={isLoading}
+                      className="w-full border border-border rounded-xl px-4 py-3 text-sm font-medium focus:outline-none focus:border-[#DC5817] transition-colors resize-none disabled:opacity-50"
                       placeholder="Tell us about your project requirements..."
                     />
                   </div>
                   <div className="form-field">
                     <button
                       type="submit"
-                      className="w-full bg-[#DC5817] hover:bg-[#C44D14] text-white font-bold py-4 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#DC5817]/20"
+                      disabled={isLoading}
+                      className="w-full bg-[#DC5817] hover:bg-[#C44D14] text-white font-bold py-4 rounded-full text-sm transition-all hover:scale-[1.02] shadow-lg shadow-[#DC5817]/20 disabled:opacity-70 disabled:hover:scale-100 flex items-center justify-center gap-2"
                     >
-                      Send Message
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        "Send Message"
+                      )}
                     </button>
                   </div>
                 </form>
